@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ÚLFĀ — Arabian Beauty House · Botanical Body Care</title>
-<meta name="description" content="ÚLFĀ — Arabian Beauty House. A body-care collection of lotions, mists and scrubs. Order directly and personally via WhatsApp.">
+<title>ULFA — Arabian Beauty House · Botanical Body Care</title>
+<meta name="description" content="ULFA — Arabian Beauty House. A body-care collection of lotions, mists and scrubs. Order directly and personally via WhatsApp.">
 <meta name="theme-color" content="#FFFFFF">
-<meta property="og:title" content="ÚLFĀ — Arabian Beauty House">
+<meta property="og:title" content="ULFA — Arabian Beauty House">
 <meta property="og:description" content="Botanical body care composed as ritual — lotions, mists and scrubs, ordered personally via WhatsApp.">
 <meta property="og:image" content="https://i.imgur.com/tLwolka.jpeg">
 
 <!-- ============================================================
-     ÚLFĀ — ARABIAN BEAUTY HOUSE · single-file website
+     ULFA — ARABIAN BEAUTY HOUSE · single-file website
      ------------------------------------------------------------
      EDIT GUIDE
      • Brand palette → CSS custom properties in :root (below head)
@@ -21,7 +21,7 @@
      • Section copy → plain HTML text, all editable in place
      ============================================================ -->
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%239C1B41'%3E%3Cpolygon points='12,2.6 21.4,12 12,21.4 2.6,12'/%3E%3Cpolygon points='4.6,4.6 19.4,4.6 19.4,19.4 4.6,19.4'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23AE154E'%3E%3Cpolygon points='12,2.6 21.4,12 12,21.4 2.6,12'/%3E%3Cpolygon points='4.6,4.6 19.4,4.6 19.4,19.4 4.6,19.4'/%3E%3C/g%3E%3C/svg%3E">
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -40,18 +40,18 @@
    Magenta, Terracotta, Dark Brown, Peach, Pure White
    ================================================================ */
 :root{
-  --ulfa-white:   #FFFFFF;  /* pure white — clean, luxury ground */
-  --ulfa-porcelain:#FAFAFA; /* ultra-subtle off-white */
-  --ulfa-dark:    #1A1817;  /* deepest black/brown */
-  --ulfa-brown:   #4C2314;  /* dark brown — primary text */
-  --ulfa-umber:   #7A4B3A;  /* secondary brown — soft text */
-  --ulfa-terra:   #BD6635;  /* terracotta — structure & accents */
-  --ulfa-terra-ui:#A65426;  /* deep terracotta */
-  --ulfa-peach:   #F8B179;  /* peach */
-  --ulfa-peach-2: #FEF4ED;  /* pale peach panels */
-  --ulfa-magenta: #9C1B41;  /* magenta — deliberate accents */
-  --ulfa-line:    rgba(76,35,20,.12);
-  --ulfa-line-soft:rgba(76,35,20,.06);
+  --ulfa-white:   #FFFFFF;  /* pure white */
+  --ulfa-porcelain:#FFFFFF; /* luxury ground kept clean white */
+  --ulfa-dark:    #6A2B0C;  /* deep house brown */
+  --ulfa-brown:   #6A2B0C;  /* primary text */
+  --ulfa-umber:   #6A2B0C;  /* secondary text, softened via opacity */
+  --ulfa-terra:   #CA783C;  /* terracotta */
+  --ulfa-terra-ui:#CA783C;  /* same terracotta for UI consistency */
+  --ulfa-peach:   #FBB776;  /* peach highlight */
+  --ulfa-peach-2: #FFFFFF;  /* keep secondary grounds clean */
+  --ulfa-magenta: #AE154E;  /* magenta accent */
+  --ulfa-line:    rgba(106,43,12,.14);
+  --ulfa-line-soft:rgba(106,43,12,.08);
 
   --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --sans:  'Jost', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
@@ -83,8 +83,55 @@ button{ font:inherit; cursor:pointer; }
 ::selection{ background:var(--ulfa-peach); color:var(--ulfa-white); }
 :focus-visible{ outline:2px dashed var(--ulfa-magenta); outline-offset:3px; border-radius:2px; }
 body.no-scroll{ overflow:hidden; }
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  inset:auto;
+  pointer-events:none;
+  z-index:-1;
+  border-radius:999px;
+  filter:blur(80px);
+  opacity:.55;
+  animation:ambientFloat 18s ease-in-out infinite;
+}
+body::before{
+  width:34rem; height:34rem;
+  top:-8rem; right:-10rem;
+  background:radial-gradient(circle, rgba(251,183,118,.22) 0%, rgba(251,183,118,0) 68%);
+}
+body::after{
+  width:28rem; height:28rem;
+  left:-8rem; top:30vh;
+  background:radial-gradient(circle, rgba(174,21,78,.12) 0%, rgba(174,21,78,0) 70%);
+  animation-duration:22s;
+  animation-direction:alternate;
+}
 
 .wrap{ width:min(var(--maxw), 100% - clamp(2rem,6vw,8rem)); margin-inline:auto; }
+
+.lux-progress{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:2px;
+  z-index:140;
+  transform-origin:left center;
+  transform:scaleX(0);
+  background:linear-gradient(90deg, var(--ulfa-magenta) 0%, var(--ulfa-terra) 55%, var(--ulfa-peach) 100%);
+  box-shadow:0 0 18px rgba(174,21,78,.25);
+}
+
+[data-tilt]{
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+[data-tilt] > *{ transform-style:preserve-3d; }
+[data-parallax]{ will-change:transform; }
+
+@keyframes ambientFloat{
+  0%,100%{ transform:translate3d(0,0,0) scale(1); }
+  50%{ transform:translate3d(1.5rem,-1rem,0) scale(1.08); }
+}
 
 .skip-link{
   position:fixed; top:-100%; left:1rem; z-index:200;
@@ -121,18 +168,18 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
    ================================================================ */
 .site-header{
   position:sticky; top:0; z-index:80;
-  background:rgba(255,255,255,.9);
-  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
   border-bottom:1px solid transparent;
   transition:border-color .4s, box-shadow .4s;
 }
-.site-header.is-scrolled{ border-bottom-color:var(--ulfa-line-soft); box-shadow:0 10px 40px -24px rgba(0,0,0,.08); }
+.site-header.is-scrolled{ border-bottom-color:var(--ulfa-line-soft); box-shadow:0 10px 40px -24px rgba(106,43,12,.08); }
 .header-inner{
   display:flex; align-items:center; justify-content:space-between;
   gap:1.5rem; padding-block:1rem;
 }
 .brand{ display:flex; align-items:center; text-decoration:none; }
-.brand-logo{ height:42px; width:auto; mix-blend-mode:multiply; }
+.brand-logo{ height:72px; width:auto; mix-blend-mode:multiply; }
 
 .main-nav{ display:flex; gap:2.5rem; }
 .main-nav a{
@@ -194,18 +241,32 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
    ================================================================ */
 .btn{
   display:inline-flex; align-items:center; gap:.6rem;
-  font-size:.7rem; font-weight:500; letter-spacing:.24em; text-transform:uppercase;
-  padding:.85rem 1.8rem; text-decoration:none; border:1px solid transparent;
-  transition:background .35s, color .35s, border-color .35s, transform .35s var(--ease-out);
+  font-size:.7rem; font-weight:500; letter-spacing:.28em; text-transform:uppercase;
+  padding:.95rem 1.95rem; text-decoration:none; border:1px solid transparent;
+  transition:background .35s, color .35s, border-color .35s, transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
 }
+.btn::before{
+  content:"";
+  position:absolute; inset:-20% auto -20% -30%;
+  width:30%;
+  background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.7) 50%, rgba(255,255,255,0) 100%);
+  transform:skewX(-18deg) translateX(-180%);
+  transition:transform .95s var(--ease-out);
+  z-index:-1;
+}
+.btn:hover::before,
+.btn:focus-visible::before{ transform:skewX(-18deg) translateX(430%); }
 .btn svg{ width:15px; height:15px; transition:transform .35s var(--ease-out); }
 .btn:hover svg{ transform:translateX(3px); }
-.btn-terra{ background:var(--ulfa-brown); color:var(--ulfa-white); border-color:var(--ulfa-brown); }
-.btn-terra:hover{ background:var(--ulfa-magenta); border-color:var(--ulfa-magenta); }
-.btn-ghost{ background:transparent; color:var(--ulfa-brown); border-color:var(--ulfa-line); }
-.btn-ghost:hover{ background:var(--ulfa-porcelain); border-color:var(--ulfa-magenta); color:var(--ulfa-magenta); }
-.btn-light{ background:var(--ulfa-white); color:var(--ulfa-brown); border-color:var(--ulfa-white); }
-.btn-light:hover{ background:var(--ulfa-peach-2); border-color:var(--ulfa-peach-2); }
+.btn-terra{ background:var(--ulfa-brown); color:var(--ulfa-white); border-color:var(--ulfa-brown); box-shadow:0 10px 24px -20px rgba(106,43,12,.55); }
+.btn-terra:hover{ background:var(--ulfa-terra); border-color:var(--ulfa-terra); transform:translateY(-1px); }
+.btn-ghost{ background:var(--ulfa-white); color:var(--ulfa-brown); border-color:var(--ulfa-brown); }
+.btn-ghost:hover{ background:var(--ulfa-white); border-color:var(--ulfa-magenta); color:var(--ulfa-magenta); transform:translateY(-1px); }
+.btn-light{ background:var(--ulfa-white); color:var(--ulfa-brown); border-color:var(--ulfa-brown); }
+.btn-light:hover{ background:var(--ulfa-white); border-color:var(--ulfa-terra); color:var(--ulfa-terra); }
 
 .linklike{
   background:none; border:none; padding:0; color:var(--ulfa-umber);
@@ -223,25 +284,70 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
    ================================================================ */
 .hero{
   position:relative;
-  display:grid; grid-template-columns:minmax(0,6fr) minmax(0,6fr);
-  gap:clamp(3rem,6vw,6rem); align-items:center;
-  padding-block:clamp(3rem,8vh,6rem) clamp(3rem,7vh,5rem);
+  display:grid; grid-template-columns:minmax(0,5.3fr) minmax(0,6.7fr);
+  gap:clamp(3.5rem,7vw,7rem); align-items:center;
+  padding-block:clamp(4rem,10vh,7rem) clamp(3.5rem,8vh,5.8rem);
+  isolation:isolate;
+  --mx:50%;
+  --my:40%;
+}
+.hero::before,
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:auto;
+  pointer-events:none;
+  z-index:-1;
+}
+.hero::before{
+  width:min(42rem,68vw); height:min(42rem,68vw);
+  right:-8rem; top:-6rem;
+  border-radius:50%;
+  background:radial-gradient(circle at center, rgba(251,183,118,.24) 0%, rgba(251,183,118,.09) 26%, rgba(251,183,118,0) 68%);
+  filter:blur(10px);
+  animation:heroAura 14s ease-in-out infinite;
+}
+.hero::after{
+  inset:0;
+  background:
+    radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,.95) 0%, rgba(255,255,255,.45) 10%, rgba(255,255,255,0) 22%),
+    linear-gradient(120deg, rgba(174,21,78,.05) 0%, rgba(174,21,78,0) 34%),
+    linear-gradient(300deg, rgba(202,120,60,.06) 0%, rgba(202,120,60,0) 30%);
+  opacity:.9;
 }
 .hero-logo{
-  max-height:85px; width:auto; max-width:100%; mix-blend-mode:multiply;
-  margin-bottom:2.5rem;
+  max-height:180px; width:auto; max-width:100%; mix-blend-mode:multiply;
+  margin-bottom:2.8rem;
+  filter:drop-shadow(0 18px 28px rgba(106,43,12,.08));
 }
-.hero h1{ margin-top:0; }
+.hero-copy{ position:relative; z-index:2; }
+.hero h1{ margin-top:0; max-width:10ch; text-wrap:balance; }
 .hero .lede{ margin-top:1.5rem; }
 .hero-ctas{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.5rem; }
 
 /* hero botanical arch */
-.hero-fig{ position:relative; margin:0; }
+.hero-fig{
+  position:relative; margin:0;
+  perspective:1400px;
+  transition:transform .45s var(--ease-out), filter .45s var(--ease-out);
+}
 .hero-fig::before{
   content:""; position:absolute; inset:0;
   transform:translate(16px,16px);
   border:1px solid var(--ulfa-terra);
   border-radius:15rem 15rem 0 0;
+  pointer-events:none;
+  box-shadow:0 40px 80px -50px rgba(106,43,12,.35);
+}
+.hero-fig::after{
+  content:"";
+  position:absolute;
+  inset:-4% -8% auto auto;
+  width:14rem; height:14rem;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(174,21,78,.18) 0%, rgba(174,21,78,0) 70%);
+  filter:blur(28px);
+  animation:floatHalo 9s ease-in-out infinite;
   pointer-events:none;
 }
 .hero-media{
@@ -249,9 +355,21 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
   border-radius:15rem 15rem 0 0;
   aspect-ratio:3/4;
   border:1px solid var(--ulfa-line);
-  background:var(--ulfa-peach-2);
+  background:var(--ulfa-white);
+  transform:translateZ(0);
 }
-.hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:contrast(1.05) brightness(0.98); }
+.hero-media::before{
+  content:"";
+  position:absolute; inset:-20% auto -20% -35%;
+  width:44%;
+  background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.7) 48%, rgba(255,255,255,0) 100%);
+  transform:skewX(-18deg) translateX(-140%);
+  animation:glintSweep 7s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
+}
+.hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:contrast(1.05) brightness(0.98) saturate(1.02); transition:transform 1.2s var(--ease-out); transform:translate3d(0,var(--py,0px),0) scale(var(--img-scale,1)); }
+.hero-fig:hover .hero-media img{ --img-scale:1.05; }
 .hero-media::after{
   content:""; position:absolute; inset:12px; pointer-events:none;
   border:1px solid rgba(255,255,255,.6); border-radius:14rem 14rem 0 0;
@@ -260,8 +378,8 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
   display:flex; align-items:center; gap:.7rem; margin-top:1.2rem;
   font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber);
 }
-.hero-star-a{ position:absolute; top:-14px; left:-14px; width:34px; height:34px; color:var(--ulfa-magenta); }
-.hero-star-b{ position:absolute; bottom:22%; right:-18px; width:22px; height:22px; color:var(--ulfa-terra); }
+.hero-star-a{ position:absolute; top:-14px; left:-14px; width:34px; height:34px; color:var(--ulfa-magenta); animation:floatHalo 7s ease-in-out infinite; }
+.hero-star-b{ position:absolute; bottom:22%; right:-18px; width:22px; height:22px; color:var(--ulfa-terra); animation:floatHalo 10s ease-in-out infinite reverse; }
 
 .scroll-cue{
   grid-column:1/-1; display:flex; align-items:center; gap:1.2rem;
@@ -281,7 +399,7 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
   .hero{ grid-template-columns:1fr; gap:3.5rem; }
   .hero-fig{ max-width:440px; margin: 0 auto; }
   .hero-media{ aspect-ratio:4/5; }
-  .hero-logo{ max-height:70px; margin-bottom: 2rem; }
+  .hero-logo{ max-height:140px; margin-bottom: 2rem; }
 }
 
 /* ================================================================
@@ -311,9 +429,9 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
    08 · RIBBON — fragrance marquee
    ================================================================ */
 .ribbon{
-  background:var(--ulfa-magenta); color:var(--ulfa-white);
-  overflow:hidden; padding:.9rem 0;
-  border-block:1px solid var(--ulfa-magenta);
+  background:var(--ulfa-brown); color:var(--ulfa-white);
+  overflow:hidden; padding:.95rem 0;
+  border-block:1px solid var(--ulfa-brown);
 }
 .ribbon-track{ display:flex; width:max-content; animation:marquee 36s linear infinite; }
 .ribbon-track:hover{ animation-play-state:paused; }
@@ -392,15 +510,31 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
 }
 
 /* product */
+.product{
+  transform-style:preserve-3d;
+}
 .product-media{
   position:relative; display:block; width:100%; padding:0; border:none;
   background:transparent; overflow:visible; text-align:inherit;
+  perspective:1200px;
+  transition:transform .45s var(--ease-out), filter .45s var(--ease-out);
 }
 .product-media .plate{
   position:relative; overflow:hidden; border:1px solid var(--ulfa-line-soft);
-  background: var(--ulfa-porcelain);
+  background:var(--ulfa-white);
   aspect-ratio:4/5;
   display:flex; align-items:center; justify-content:center;
+  box-shadow:inset 0 0 0 1px rgba(106,43,12,.03), 0 34px 70px -58px rgba(106,43,12,.22);
+}
+.product-media .plate::before{
+  content:"";
+  position:absolute; inset:-10% auto -10% -30%;
+  width:34%;
+  background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.9) 48%, rgba(255,255,255,0) 100%);
+  transform:skewX(-16deg) translateX(-180%);
+  transition:transform 1.05s var(--ease-out);
+  z-index:2;
+  pointer-events:none;
 }
 .product-media.frame-arch .plate{ border-radius:14rem 14rem 0 0; }
 .product-media .plate::after{
@@ -410,16 +544,22 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
 .product-media.frame-arch .plate::after{ border-radius:13rem 13rem 0 0; }
 .product-media img{
   width:84%; height:84%; object-fit:contain;
-  transition:transform .8s var(--ease-out);
-  filter:drop-shadow(0 15px 25px rgba(0,0,0,.04));
+  transition:transform .85s var(--ease-out), filter .85s var(--ease-out);
+  filter:drop-shadow(0 15px 25px rgba(106,43,12,.09));
+  transform:translateZ(24px);
 }
-.product-media:hover img, .product-media:focus-visible img{ transform:scale(1.045) translateY(-5px); }
+.product-media:hover,
+.product-media:focus-visible{ filter:brightness(1.02); }
+.product-media:hover .plate::before,
+.product-media:focus-visible .plate::before{ transform:skewX(-16deg) translateX(430%); }
+.product-media:hover img, .product-media:focus-visible img{ transform:scale(1.065) translateY(-6px) translateZ(30px); filter:drop-shadow(0 22px 36px rgba(106,43,12,.14)); }
 .media-tag{
   position:absolute; right:14px; bottom:14px; z-index:2;
   background:var(--ulfa-brown); color:var(--ulfa-white);
   font-size:.62rem; letter-spacing:.3em; text-transform:uppercase;
   padding:.5rem 1rem; opacity:0; transform:translateY(8px);
   transition:opacity .35s, transform .35s var(--ease-out); pointer-events:none;
+  box-shadow:0 16px 28px -22px rgba(106,43,12,.45);
 }
 .product-media:hover .media-tag, .product-media:focus-visible .media-tag{ opacity:1; transform:none; }
 @media (hover:none){ .media-tag{ opacity:1; transform:none; } }
@@ -444,15 +584,29 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
 /* ================================================================
    11 · INTERLUDE & FINALE BANDS
    ================================================================ */
-.band{ position:relative; }
+.band{ position:relative; overflow:hidden; }
+.band::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(90deg, rgba(106,43,12,.14) 0%, rgba(106,43,12,0) 18%, rgba(106,43,12,0) 82%, rgba(174,21,78,.12) 100%);
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:1;
+}
 .band img{
   width:100%; height:clamp(360px,56vh,620px); object-fit:cover; object-position:center 62%;
+  transition:transform 1.8s var(--ease-out), filter 1.8s var(--ease-out);
+  filter:saturate(1.02) contrast(1.02);
+  transform:translate3d(0,var(--py,0px),0) scale(var(--img-scale,1));
 }
+.band:hover img{ --img-scale:1.04; }
 .band-caption{
   position:absolute; left:clamp(1rem,6vw,6rem); bottom:-1px;
-  background:var(--ulfa-white); padding:1.25rem 1.8rem;
+  background:rgba(255,255,255,.9); padding:1.25rem 1.8rem;
   display:flex; align-items:baseline; gap:1.2rem;
   border:1px solid var(--ulfa-line-soft); border-bottom:none;
+  backdrop-filter:blur(12px);
+  z-index:2;
 }
 .band-caption strong{ font-family:var(--serif); font-style:italic; font-weight:400; font-size:1.2rem; letter-spacing:.02em; color:var(--ulfa-brown); }
 .band-caption span{ font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber); }
@@ -463,17 +617,25 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
 /* ================================================================
    12 · FRAGRANCE NOTES
    ================================================================ */
-.notes{ background:var(--ulfa-porcelain); border-block:1px solid var(--ulfa-line-soft); }
+.notes{ background:var(--ulfa-white); border-block:1px solid var(--ulfa-line-soft); }
 .notes-grid{
   display:grid; grid-template-columns:minmax(0,3fr) minmax(0,3fr) minmax(0,3fr) minmax(0,3fr);
   gap:clamp(2rem,4.5vw,4rem); align-items:start;
 }
-.notes-fig{ margin:0; position:relative; }
+.notes-fig{ margin:0; position:relative; perspective:1200px; }
 .notes-fig .plate{
-  border:1px solid var(--ulfa-line); aspect-ratio:4/5; overflow:hidden; background:var(--ulfa-white);
+  border:1px solid var(--ulfa-line); aspect-ratio:4/5; overflow:hidden; background:var(--ulfa-white); position:relative;
+  box-shadow:0 28px 70px -56px rgba(106,43,12,.22);
 }
-.notes-fig img{ width:100%; height:100%; object-fit:cover; object-position:center; transition:transform 1.2s var(--ease-out); }
-.notes-fig:hover img{ transform:scale(1.05); }
+.notes-fig .plate::before{
+  content:""; position:absolute; inset:-15% auto -15% -25%; width:32%; z-index:2; pointer-events:none;
+  background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.82) 48%, rgba(255,255,255,0) 100%);
+  transform:skewX(-16deg) translateX(-180%);
+  transition:transform 1.2s var(--ease-out);
+}
+.notes-fig img{ width:100%; height:100%; object-fit:cover; object-position:center; transition:transform 1.2s var(--ease-out); transform:translate3d(0,var(--py,0px),0) scale(var(--img-scale,1)); }
+.notes-fig:hover img{ --img-scale:1.07; }
+.notes-fig:hover .plate::before{ transform:skewX(-16deg) translateX(420%); }
 .notes-fig figcaption{
   margin-top:1.1rem; font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber);
   display:flex; gap:.8rem; align-items:center;
@@ -501,13 +663,21 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
   display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr);
   gap:clamp(3rem,7vw,6.5rem); align-items:center;
 }
-.ritual-fig{ position:relative; margin:0; }
+.ritual-fig{ position:relative; margin:0; perspective:1200px; }
 .ritual-fig::before{
   content:""; position:absolute; inset:0; transform:translate(-16px,-16px);
-  background:var(--ulfa-peach-2); z-index:-1; border:1px solid var(--ulfa-line-soft);
+  background:linear-gradient(145deg, rgba(251,183,118,.14), rgba(255,255,255,0)); z-index:-1; border:1px solid var(--ulfa-line-soft);
 }
-.ritual-fig .plate{ border:1px solid var(--ulfa-line); aspect-ratio:3/4; overflow:hidden; }
-.ritual-fig img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:contrast(1.02); }
+.ritual-fig .plate{ border:1px solid var(--ulfa-line); aspect-ratio:3/4; overflow:hidden; position:relative; box-shadow:0 30px 70px -58px rgba(106,43,12,.22); }
+.ritual-fig .plate::before{
+  content:""; position:absolute; inset:-15% auto -15% -25%; width:30%; z-index:2; pointer-events:none;
+  background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.82) 48%, rgba(255,255,255,0) 100%);
+  transform:skewX(-16deg) translateX(-180%);
+  transition:transform 1.2s var(--ease-out);
+}
+.ritual-fig img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:contrast(1.02) saturate(1.02); transition:transform 1.25s var(--ease-out); transform:translate3d(0,var(--py,0px),0) scale(var(--img-scale,1)); }
+.ritual-fig:hover img{ --img-scale:1.06; }
+.ritual-fig:hover .plate::before{ transform:skewX(-16deg) translateX(420%); }
 .ritual-fig figcaption{
   margin-top:1.1rem; font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber);
   display:flex; gap:.8rem; align-items:center;
@@ -528,9 +698,10 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
    14 · FROM THE LABEL
    ================================================================ */
 .label-section .label-card{
-  border:1px solid var(--ulfa-line); background:var(--ulfa-porcelain);
+  border:1px solid var(--ulfa-line); background:var(--ulfa-white);
   padding:clamp(2.5rem,6vw,4.5rem);
   position:relative;
+  box-shadow:inset 0 0 0 1px rgba(106,43,12,.03);
 }
 .label-head{ text-align:center; max-width:600px; margin:0 auto 2.5rem; }
 .label-head .star{ width:18px; height:18px; }
@@ -586,16 +757,17 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
    ================================================================ */
 .modal{ position:fixed; inset:0; z-index:150; display:flex; align-items:center; justify-content:center; padding:clamp(.8rem,3vw,2.5rem); }
 .modal[hidden]{ display:none; }
-.modal-backdrop{ position:absolute; inset:0; background:rgba(26,24,23,.65); backdrop-filter:blur(8px); opacity:0; transition:opacity .35s; }
+.modal-backdrop{ position:absolute; inset:0; background:rgba(106,43,12,.65); backdrop-filter:blur(10px); opacity:0; transition:opacity .35s; }
 .modal.open .modal-backdrop{ opacity:1; }
 .modal-panel{
   position:relative; background:var(--ulfa-white); width:min(1040px,100%);
   max-height:min(88vh, 900px); overflow:auto;
   border:1px solid var(--ulfa-line);
   display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr);
-  opacity:0; transform:translateY(26px) scale(.985);
-  transition:opacity .4s var(--ease-out), transform .4s var(--ease-out);
+  opacity:0; transform:translateY(26px) scale(.972) rotateX(5deg);
+  transition:opacity .48s var(--ease-out), transform .48s var(--ease-out);
   scrollbar-width:thin;
+  box-shadow:0 46px 90px -60px rgba(106,43,12,.38);
 }
 .modal.open .modal-panel{ opacity:1; transform:none; }
 .modal-close{
@@ -607,7 +779,7 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
 }
 .modal-close:hover{ background:var(--ulfa-brown); color:var(--ulfa-white); }
 .modal-media{
-  position:relative; background: var(--ulfa-porcelain);
+  position:relative; background:var(--ulfa-white);
   border-right:1px solid var(--ulfa-line);
   display:flex; align-items:center; justify-content:center; padding:clamp(2rem,4vw,3.5rem);
   min-height:360px;
@@ -636,7 +808,7 @@ h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-
 .is-missing{ position:relative; background:var(--ulfa-peach-2) !important; }
 .is-missing::before{
   content:""; position:absolute; inset:0; opacity:.25;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='%23BD6635'%3E%3Cpolygon points='28,18 38,28 28,38 18,28'/%3E%3Cpolygon points='21,21 35,21 35,35 21,35'/%3E%3C/g%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='%23CA783C'%3E%3Cpolygon points='28,18 38,28 28,38 18,28'/%3E%3Cpolygon points='21,21 35,21 35,35 21,35'/%3E%3C/g%3E%3C/svg%3E");
 }
 .is-missing::after{ border:none !important; }
 
@@ -654,6 +826,19 @@ body.loaded .hero h1{ opacity:1; transform:none; --d:.16s; }
 body.loaded .hero .lede{ opacity:1; transform:none; --d:.24s; }
 body.loaded .hero-ctas{ opacity:1; transform:none; --d:.32s; }
 body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
+
+@keyframes heroAura{
+  0%,100%{ transform:translate3d(0,0,0) scale(1); opacity:.92; }
+  50%{ transform:translate3d(-1rem,1.25rem,0) scale(1.06); opacity:1; }
+}
+@keyframes glintSweep{
+  0%,12%{ transform:skewX(-18deg) translateX(-160%); }
+  38%,100%{ transform:skewX(-18deg) translateX(420%); }
+}
+@keyframes floatHalo{
+  0%,100%{ transform:translate3d(0,0,0) rotate(0deg); }
+  50%{ transform:translate3d(0,-8px,0) rotate(6deg); }
+}
 
 /* ================================================================
    19 · NOSCRIPT & MISC
@@ -674,12 +859,15 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
   .ribbon-track{ animation:none !important; width:100%; justify-content:center; }
   .ribbon-group:nth-child(2){ display:none; }
   .reveal, .hero-logo, .hero-descriptor, .hero h1, .hero .lede, .hero-ctas, .hero-fig, .hero-arabic{ opacity:1 !important; transform:none !important; }
+  body::before, body::after, .hero::before, .hero::after, .hero-media::before, .product-media .plate::before, .notes-fig .plate::before, .ritual-fig .plate::before, .btn::before{ display:none !important; }
+  .lux-progress{ display:none !important; }
 }
 </style>
 </head>
 
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="lux-progress" id="luxProgress" aria-hidden="true"></div>
 
 <!-- shared ornament -->
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -692,8 +880,8 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
 <!-- ================= HEADER ================= -->
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
-    <a class="brand" href="#top" aria-label="ÚLFĀ — Arabian Beauty House, back to top">
-      <img src="https://i.imgur.com/J0w9XPe.jpeg" class="brand-logo" alt="ÚLFĀ Arabian Beauty House">
+    <a class="brand" href="#top" aria-label="ULFA — Arabian Beauty House, back to top">
+      <img src="https://i.imgur.com/J0w9XPe.jpeg" class="brand-logo" alt="ULFA Arabian Beauty House">
     </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="#collection">Collection</a>
@@ -724,7 +912,7 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
     <a href="#contact"><span>Contact</span><span class="arabic">التواصل</span></a>
   </nav>
   <div class="menu-foot">
-    <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ÚLFĀ Arabian Beauty House">
+    <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ULFA Arabian Beauty House">
     <a class="btn btn-terra" id="menuWa" href="https://wa.me/96171109910" target="_blank" rel="noopener">
       <i data-lucide="message-circle" aria-hidden="true"></i><span>Order on WhatsApp</span>
     </a>
@@ -734,22 +922,22 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
 <main id="main">
 
   <!-- ================= HERO ================= -->
-  <section class="hero wrap" id="top" aria-label="Introduction">
+  <section class="hero wrap" id="top" aria-label="Introduction" data-hero-light>
     <div class="hero-copy">
-      <img src="https://i.imgur.com/J0w9XPe.jpeg" class="hero-logo reveal" alt="ÚLFĀ Arabian Beauty House">
+      <img src="https://i.imgur.com/J0w9XPe.jpeg" class="hero-logo reveal" alt="ULFA Arabian Beauty House">
       <h1 class="display reveal" style="--d:.08s">The quiet ceremony<br>of <em>everyday care</em>.</h1>
-      <p class="lede reveal" style="--d:.16s">A body-care collection composed in three rituals — lotions, mists and scrubs — eight compositions, each finished with restraint, fragrance, and the house’s botanical hand.</p>
+      <p class="lede reveal" style="--d:.16s">A body-care collection composed in three rituals — lotions, mists and scrubs — nine compositions, each finished with restraint, fragrance, and the house’s botanical hand.</p>
       <div class="hero-ctas reveal" style="--d:.24s">
         <a class="btn btn-terra" href="#collection">Explore the Collection <i data-lucide="arrow-down" aria-hidden="true"></i></a>
         <a class="btn btn-ghost" href="#notes">Discover the Notes</a>
       </div>
     </div>
 
-    <figure class="hero-fig reveal" style="--d:.12s">
+    <figure class="hero-fig reveal" style="--d:.12s" data-tilt>
       <svg class="star hero-star-a" aria-hidden="true"><use href="#ulfa-star"/></svg>
       <svg class="star hero-star-b" aria-hidden="true"><use href="#ulfa-star"/></svg>
       <div class="hero-media" data-media>
-        <img src="https://i.imgur.com/tLwolka.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study one" fetchpriority="high" decoding="async">
+        <img src="https://i.imgur.com/tLwolka.jpeg" alt="Botanical photograph from the ULFA editorial garden — study one" fetchpriority="high" decoding="async" data-parallax data-speed="0.12">
       </div>
       <figcaption class="hero-caption">
         <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg>
@@ -805,25 +993,26 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
     <div class="section-head reveal">
       <div>
         <p class="eyebrow"><span class="num">01</span> The Collection</p>
-        <h2 class="display" id="collectionTitle">Three rituals,<br><em>eight compositions.</em></h2>
+        <h2 class="display" id="collectionTitle">Three rituals,<br><em>nine compositions.</em></h2>
       </div>
       <p class="lede">Every piece is ordered directly and personally — choose a composition, and continue the conversation on WhatsApp. Nothing more is asked of you.</p>
     </div>
 
     <div class="filters reveal" role="group" aria-label="Filter the collection by category">
-      <button class="filter-btn active" data-filter="all" aria-pressed="true">All Products <sup>08</sup></button>
-      <button class="filter-btn" data-filter="lotion" aria-pressed="false">Body Lotion <sup>02</sup></button>
+      <button class="filter-btn active" data-filter="all" aria-pressed="true">All Products <sup>09</sup></button>
+      <button class="filter-btn" data-filter="lotion" aria-pressed="false">Body Lotion <sup>03</sup></button>
       <button class="filter-btn" data-filter="mist" aria-pressed="false">Body Mist <sup>03</sup></button>
       <button class="filter-btn" data-filter="scrub" aria-pressed="false">Body Scrub <sup>03</sup></button>
     </div>
-    <p class="sr-only" aria-live="polite" id="filterStatus">Showing all eight products.</p>
+    <p class="sr-only" aria-live="polite" id="filterStatus">Showing all nine products.</p>
 
     <div id="galleryWrap">
       <div id="gallery"><!-- rendered from the product catalog --></div>
       <noscript>
         <div class="noscript-box">
-          <h3>The ÚLFĀ Catalog — order via WhatsApp</h3>
+          <h3>The ULFA Catalog — order via WhatsApp</h3>
           <ul>
+            <li><span>Nasma Body Lotion · Body Lotion · 150 ml · $15.70</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Nasma%20Body%20Lotion%0ACategory%3A%20Body%20Lotion%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2FV4qVPKA.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
             <li><span>Sukun Body Lotion · Body Lotion · 150 ml · $15.70</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Sukun%20Body%20Lotion%0ACategory%3A%20Body%20Lotion%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2F4x0BhyW.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
             <li><span>Areej Body Lotion · Body Lotion · 150 ml · $15.70</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Areej%20Body%20Lotion%0ACategory%3A%20Body%20Lotion%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2FAYZLaJ6.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
             <li><span>Nasma Body Mist · Body Mist · 150 ml · $15.70 · Coconut &amp; Vanilla</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Nasma%20Body%20Mist%0ACategory%3A%20Body%20Mist%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2Fx9CLbHu.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
@@ -840,7 +1029,7 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
 
   <!-- ================= INTERLUDE ================= -->
   <div class="band reveal" data-media>
-    <img src="https://i.imgur.com/fSoUem1.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study two" loading="lazy" decoding="async">
+    <img src="https://i.imgur.com/fSoUem1.jpeg" alt="Botanical photograph from the ULFA editorial garden — study two" loading="lazy" decoding="async" data-parallax data-speed="0.08">
     <div class="band-caption">
       <strong>Between gestures, the garden.</strong>
       <span>Botanical Study Nº 02</span>
@@ -859,13 +1048,13 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
       </div>
 
       <div class="notes-grid">
-        <figure class="notes-fig reveal" data-media>
-          <div class="plate"><img src="https://i.imgur.com/uJLnlLp.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study four" loading="lazy" decoding="async"></div>
+        <figure class="notes-fig reveal" data-media data-tilt>
+          <div class="plate"><img src="https://i.imgur.com/uJLnlLp.jpeg" alt="Botanical photograph from the ULFA editorial garden — study four" loading="lazy" decoding="async" data-parallax data-speed="0.09"></div>
           <figcaption><svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg><span>Study Nº 04</span></figcaption>
         </figure>
 
         <div class="note-item reveal" style="--d:.05s">
-          <div class="ar" lang="ar">نسمة</div>
+          <div class="ar" lang="ar">نَسْمَة</div>
           <h3>Nasma</h3>
           <p class="gloss">A soft breeze</p>
           <p class="pair">Coconut &amp; Vanilla</p>
@@ -873,7 +1062,7 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
         </div>
 
         <div class="note-item reveal" style="--d:.14s">
-          <div class="ar" lang="ar">سكون</div>
+          <div class="ar" lang="ar">سُكُون</div>
           <h3>Sukun</h3>
           <p class="gloss">Stillness</p>
           <p class="pair">Gardenia &amp; Musk</p>
@@ -881,7 +1070,7 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
         </div>
 
         <div class="note-item reveal" style="--d:.23s">
-          <div class="ar" lang="ar">أريج</div>
+          <div class="ar" lang="ar">أَرِيْج</div>
           <h3>Areej</h3>
           <p class="gloss">Lingering fragrance</p>
           <p class="pair">Musk &amp; Roses</p>
@@ -894,14 +1083,14 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
   <!-- ================= RITUAL ================= -->
   <section class="section wrap" id="ritual" aria-labelledby="ritualTitle">
     <div class="ritual-grid">
-      <figure class="ritual-fig reveal" data-media>
-        <div class="plate"><img src="https://i.imgur.com/U7WEo9Z.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study three" loading="lazy" decoding="async"></div>
+      <figure class="ritual-fig reveal" data-media data-tilt>
+        <div class="plate"><img src="https://i.imgur.com/U7WEo9Z.jpeg" alt="Botanical photograph from the ULFA editorial garden — study three" loading="lazy" decoding="async" data-parallax data-speed="0.1"></div>
         <figcaption><svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg><span>Botanical Study Nº 03</span></figcaption>
       </figure>
       <div class="ritual-copy">
         <p class="eyebrow reveal"><span class="num">03</span> The Art of the Ritual</p>
         <h2 class="display reveal" id="ritualTitle" style="--d:.08s">Care is a form<br>of <em>attention.</em></h2>
-        <p class="reveal" style="--d:.16s">A ritual asks for little: warm water, an unhurried minute, a fragrance chosen for the day. ÚLFĀ composes its collection around that minute — three gestures, repeated daily, until the ordinary becomes ceremony.</p>
+        <p class="reveal" style="--d:.16s">A ritual asks for little: warm water, an unhurried minute, a fragrance chosen for the day. ULFA composes its collection around that minute — three gestures, repeated daily, until the ordinary becomes ceremony.</p>
         <p class="reveal" style="--d:.22s">Nothing here is complicated. That is precisely the point.</p>
         <div class="ritual-steps reveal" style="--d:.28s">
           <div class="ritual-step"><span class="roman">I</span><span class="step-name">Polish</span><span class="step-cat">Body Scrub · 250 ml</span></div>
@@ -914,9 +1103,9 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
 
   <!-- ================= FROM THE LABEL ================= -->
   <section class="section wrap label-section" id="label" aria-labelledby="labelTitle">
-    <div class="label-card reveal">
+    <div class="label-card reveal" data-tilt>
       <div class="label-head">
-        <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ÚLFĀ Arabian Beauty House" style="max-height:65px; width:auto; mix-blend-mode:multiply; margin:0 auto 1.5rem;">
+        <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ULFA Arabian Beauty House" style="max-height:160px; width:auto; mix-blend-mode:multiply; margin:0 auto 1.5rem;">
         <p class="eyebrow" style="margin-top:1rem"><span class="num">04</span> From the Label</p>
         <h2 class="display" id="labelTitle" style="font-size:clamp(1.9rem,3.6vw,2.8rem)">Body Mist · <em>150 ml</em></h2>
         <p class="lede" style="margin:1rem auto 0; text-align:center">A lightweight fragrance for everyday wear — the complete product information, exactly as it appears on the packaging.</p>
@@ -954,13 +1143,13 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
           </div>
         </details>
       </div>
-      <p class="label-foot">Reproduced from the ÚLFĀ body-mist packaging, without addition or embellishment.</p>
+      <p class="label-foot">Reproduced from the ULFA body-mist packaging, without addition or embellishment.</p>
     </div>
   </section>
 
   <!-- ================= FINALE ================= -->
   <div class="band finale reveal" data-media>
-    <img src="https://i.imgur.com/pXEmxDS.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study five" loading="lazy" decoding="async">
+    <img src="https://i.imgur.com/pXEmxDS.jpeg" alt="Botanical photograph from the ULFA editorial garden — study five" loading="lazy" decoding="async" data-parallax data-speed="0.07">
     <div class="band-caption">
       <strong>The house keeps a garden.</strong>
       <span>Botanical Study Nº 05</span>
@@ -973,7 +1162,7 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
   <div class="wrap footer-inner">
     
     <div style="text-align:center; margin-bottom:2.5rem;">
-      <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ÚLFĀ Arabian Beauty House" style="max-height:100px; width:auto; mix-blend-mode:multiply; margin:0 auto;">
+      <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ULFA Arabian Beauty House" style="max-height:200px; width:auto; mix-blend-mode:multiply; margin:0 auto;">
     </div>
     
     <div class="verification-bar" style="border:none; padding:0 0 3.5rem 0;">
@@ -1009,13 +1198,13 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
         <ul>
           <li><a id="footerWa" href="https://wa.me/96171109910" target="_blank" rel="noopener">WhatsApp · +961 71 109 910</a></li>
           <li><a id="footerWa2" href="https://wa.me/96171109910" target="_blank" rel="noopener">Order a composition</a></li>
-          <li><span class="ar" lang="ar">أُلفة — دار جمال عربية</span></li>
+
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© <span id="year">2026</span> ÚLFĀ · Arabian Beauty House</span>
+      <span>© <span id="year">2026</span> ULFA · Arabian Beauty House</span>
       <span class="ar" lang="ar">صُنع بعناية</span>
       <span>All rights reserved</span>
     </div>
@@ -1025,7 +1214,7 @@ body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
 <!-- ================= PRODUCT MODAL ================= -->
 <div class="modal" id="productModal" hidden>
   <div class="modal-backdrop" data-close></div>
-  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="pmName">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="pmName" data-tilt>
     <button class="modal-close" data-close><i data-lucide="x" aria-hidden="true"></i><span>Close</span></button>
     <div class="modal-media" data-media><img id="pmImg" src="" alt=""></div>
     <div class="modal-body">
@@ -1076,6 +1265,7 @@ const WA_NUMBER = '96171109910'; // international format, no '+'
    fragrance — body mists only, per the packaging artwork
    ================================================================ */
 const PRODUCTS = [
+  { id:'lotion-nasma', name:'Nasma Body Lotion', category:'Body Lotion', cat:'lotion', size:'150 ml', price:'$15.70', image:'https://i.imgur.com/V4qVPKA.jpeg' },
   { id:'lotion-sukun', name:'Sukun Body Lotion', category:'Body Lotion', cat:'lotion', size:'150 ml', price:'$15.70', image:'https://i.imgur.com/4x0BhyW.jpeg' },
   { id:'lotion-areej', name:'Areej Body Lotion', category:'Body Lotion', cat:'lotion', size:'150 ml', price:'$15.70', image:'https://i.imgur.com/AYZLaJ6.jpeg' },
   { id:'mist-nasma',   name:'Nasma Body Mist',   category:'Body Mist',   cat:'mist',   size:'150 ml', price:'$15.70', image:'https://i.imgur.com/x9CLbHu.jpeg', fragrance:'Coconut & Vanilla' },
@@ -1088,7 +1278,7 @@ const PRODUCTS = [
 
 /* Chapter presentation for each category */
 const CHAPTERS = {
-  lotion:{ numeral:'I',   blurb:'A silken finish to the daily ritual', variant:'duo' },
+  lotion:{ numeral:'I',   blurb:'A silken finish to the daily ritual', variant:'trio' },
   mist:  { numeral:'II',  blurb:'Lightweight fragrance for everyday wear', variant:'trio' },
   scrub: { numeral:'III', blurb:'Where the ritual begins', variant:'trio' }
 };
@@ -1099,6 +1289,84 @@ const FRAME_MAP = { duo:['arch','rect'], trio:['rect','arch','rect'] };
 const FRAME_MAP_SCRUB = ['arch','rect','arch'];
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const motionStore = { parallax: [], ticking: false };
+
+/* ================================================================
+   LUXURY MOTION ENGINE
+   ================================================================ */
+function initInteractiveMotion(scope = document){
+  if(reduceMotion) return;
+
+  scope.querySelectorAll('[data-tilt]').forEach(el=>{
+    if(el.dataset.motionReady === 'true') return;
+    el.dataset.motionReady = 'true';
+
+    const onMove = (e) => {
+      const rect = el.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const ry = (px - .5) * 10;
+      const rx = (.5 - py) * 10;
+      el.style.transform = `perspective(1400px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translate3d(0,-4px,0)`;
+    };
+
+    const onLeave = () => {
+      el.style.transform = '';
+    };
+
+    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointerleave', onLeave);
+    el.addEventListener('pointercancel', onLeave);
+  });
+
+  scope.querySelectorAll('[data-parallax]').forEach(el=>{
+    if(!motionStore.parallax.includes(el)) motionStore.parallax.push(el);
+  });
+
+  scope.querySelectorAll('[data-hero-light]').forEach(el=>{
+    if(el.dataset.lightReady === 'true') return;
+    el.dataset.lightReady = 'true';
+    el.addEventListener('pointermove', (e)=>{
+      const rect = el.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty('--mx', `${x}%`);
+      el.style.setProperty('--my', `${y}%`);
+    });
+    el.addEventListener('pointerleave', ()=>{
+      el.style.setProperty('--mx', '50%');
+      el.style.setProperty('--my', '40%');
+    });
+  });
+}
+
+function updateParallax(){
+  if(reduceMotion) return;
+  motionStore.parallax.forEach(el=>{
+    const rect = el.getBoundingClientRect();
+    if(rect.bottom < -120 || rect.top > window.innerHeight + 120) return;
+    const speed = parseFloat(el.dataset.speed || '0.08');
+    const offset = ((window.innerHeight * 0.5) - (rect.top + rect.height * 0.5)) * speed;
+    el.style.setProperty('--py', `${offset.toFixed(2)}px`);
+  });
+}
+
+function requestParallax(){
+  if(motionStore.ticking) return;
+  motionStore.ticking = true;
+  requestAnimationFrame(()=>{
+    updateParallax();
+    motionStore.ticking = false;
+  });
+}
+
+function updateProgress(){
+  const bar = document.getElementById('luxProgress');
+  if(!bar) return;
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const ratio = max > 0 ? window.scrollY / max : 0;
+  bar.style.transform = `scaleX(${Math.max(0, Math.min(1, ratio))})`;
+}
 
 /* ================================================================
    WHATSAPP MESSAGE BUILDER
@@ -1116,7 +1384,7 @@ Product image: ${p.image}
 Please confirm availability and delivery details. Thank you!`;
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
-const GENERAL_MSG = encodeURIComponent('Hello! I would like to know more about ÚLFĀ — Arabian Beauty House products.');
+const GENERAL_MSG = encodeURIComponent('Hello! I would like to know more about ULFA — Arabian Beauty House products.');
 const GENERAL_WA = `https://wa.me/${WA_NUMBER}?text=${GENERAL_MSG}`;
 ['headerWa','menuWa','footerWa','footerWa2'].forEach(id=>{
   const el = document.getElementById(id); if(el) el.href = GENERAL_WA;
@@ -1134,8 +1402,8 @@ function productCard(p, i, frame){
   const frag = p.fragrance ? `<p class="p-note">${p.fragrance}</p>` : '';
   return `
   <article class="product reveal" style="--d:${(i*0.07).toFixed(2)}s">
-    <button class="product-media frame-${frame}" data-media data-details="${p.id}" aria-label="Open product details — ${p.name}">
-      <span class="plate"><img src="${p.image}" alt="${p.name} — ÚLFĀ ${p.category}, ${p.size}" loading="lazy" decoding="async"></span>
+    <button class="product-media frame-${frame}" data-media data-details="${p.id}" data-tilt aria-label="Open product details — ${p.name}">
+      <span class="plate"><img src="${p.image}" alt="${p.name} — ULFA ${p.category}, ${p.size}" loading="lazy" decoding="async"></span>
       <span class="media-tag" aria-hidden="true">View Details</span>
     </button>
     <div class="product-meta">
@@ -1176,10 +1444,12 @@ function renderGallery(filter){
     </section>`;
   });
   gallery.innerHTML = html;
-  const label = filter==='all' ? `Showing all ${count} products.` : `Showing ${count} products in ${cats[0]==='lotion'?'Body Lotion':cats[0]==='mist'?'Body Mist':'Body Scrub'}.`;
+  const label = filter==='all' ? `Showing all nine products.` : `Showing ${count} products in ${cats[0]==='lotion'?'Body Lotion':cats[0]==='mist'?'Body Mist':'Body Scrub'}.`;
   filterStatus.textContent = label;
   if(window.lucide) lucide.createIcons();
   observeReveals(gallery);
+  initInteractiveMotion(gallery);
+  requestParallax();
 }
 
 /* ================================================================
@@ -1322,8 +1592,13 @@ document.addEventListener('error', e=>{
 document.getElementById('year').textContent = new Date().getFullYear();
 renderGallery('all');
 observeReveals(document);
+initInteractiveMotion(document);
+requestParallax();
+updateProgress();
+addEventListener('scroll', ()=>{ requestParallax(); updateProgress(); }, { passive:true });
+addEventListener('resize', ()=>{ requestParallax(); updateProgress(); }, { passive:true });
 if(window.lucide) lucide.createIcons();
-window.addEventListener('load', ()=> document.body.classList.add('loaded'));
+window.addEventListener('load', ()=>{ document.body.classList.add('loaded'); requestParallax(); updateProgress(); });
 document.body.classList.add('loaded'); /* ensure hero shows even before full image load */
 </script>
 </body>
