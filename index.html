@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÚLFĀ — Arabian Beauty House · Botanical Body Care</title>
+<meta name="description" content="ÚLFĀ — Arabian Beauty House. A body-care collection of lotions, mists and scrubs. Order directly and personally via WhatsApp.">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:title" content="ÚLFĀ — Arabian Beauty House">
+<meta property="og:description" content="Botanical body care composed as ritual — lotions, mists and scrubs, ordered personally via WhatsApp.">
+<meta property="og:image" content="https://i.imgur.com/tLwolka.jpeg">
+
+<!-- ============================================================
+     ÚLFĀ — ARABIAN BEAUTY HOUSE · single-file website
+     ------------------------------------------------------------
+     EDIT GUIDE
+     • Brand palette → CSS custom properties in :root (below head)
+     • Product catalog → PRODUCTS array (bottom <script>)
+     • Prices / sizes / images / fragrances → same array
+     • WhatsApp number → WA_NUMBER constant (bottom <script>)
+     • Section copy → plain HTML text, all editable in place
+     ============================================================ -->
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%239C1B41'%3E%3Cpolygon points='12,2.6 21.4,12 12,21.4 2.6,12'/%3E%3Cpolygon points='4.6,4.6 19.4,4.6 19.4,19.4 4.6,19.4'/%3E%3C/g%3E%3C/svg%3E">
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://i.imgur.com">
+<link rel="dns-prefetch" href="https://i.imgur.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://i.imgur.com/tLwolka.jpeg" fetchpriority="high">
+<link rel="preload" as="image" href="https://i.imgur.com/J0w9XPe.jpeg" fetchpriority="high">
+
+<style>
+/* ================================================================
+   01 · OFFICIAL PALETTE
+   Extracted from the supplied image treatments:
+   Magenta, Terracotta, Dark Brown, Peach, Pure White
+   ================================================================ */
+:root{
+  --ulfa-white:   #FFFFFF;  /* pure white — clean, luxury ground */
+  --ulfa-porcelain:#FAFAFA; /* ultra-subtle off-white */
+  --ulfa-dark:    #1A1817;  /* deepest black/brown */
+  --ulfa-brown:   #4C2314;  /* dark brown — primary text */
+  --ulfa-umber:   #7A4B3A;  /* secondary brown — soft text */
+  --ulfa-terra:   #BD6635;  /* terracotta — structure & accents */
+  --ulfa-terra-ui:#A65426;  /* deep terracotta */
+  --ulfa-peach:   #F8B179;  /* peach */
+  --ulfa-peach-2: #FEF4ED;  /* pale peach panels */
+  --ulfa-magenta: #9C1B41;  /* magenta — deliberate accents */
+  --ulfa-line:    rgba(76,35,20,.12);
+  --ulfa-line-soft:rgba(76,35,20,.06);
+
+  --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --sans:  'Jost', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  --arabic:'Amiri', 'Traditional Arabic', serif;
+
+  --maxw: 1360px;
+  --ease-out: cubic-bezier(.22,1,.36,1);
+}
+
+/* ================================================================
+   02 · BASE
+   ================================================================ */
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:96px; }
+body{
+  margin:0;
+  background:var(--ulfa-white);
+  color:var(--ulfa-brown);
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+button{ font:inherit; cursor:pointer; }
+::selection{ background:var(--ulfa-peach); color:var(--ulfa-white); }
+:focus-visible{ outline:2px dashed var(--ulfa-magenta); outline-offset:3px; border-radius:2px; }
+body.no-scroll{ overflow:hidden; }
+
+.wrap{ width:min(var(--maxw), 100% - clamp(2rem,6vw,8rem)); margin-inline:auto; }
+
+.skip-link{
+  position:fixed; top:-100%; left:1rem; z-index:200;
+  background:var(--ulfa-brown); color:var(--ulfa-white);
+  padding:.7rem 1.2rem; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
+  text-decoration:none; transition:top .25s;
+}
+.skip-link:focus{ top:1rem; }
+
+/* ================================================================
+   03 · TYPOGRAPHIC SYSTEM
+   ================================================================ */
+.eyebrow{
+  font-family:var(--sans); font-size:.7rem; font-weight:500;
+  letter-spacing:.36em; text-transform:uppercase; color:var(--ulfa-umber);
+  display:inline-flex; align-items:center; gap:.9rem;
+}
+.eyebrow .num{
+  font-family:var(--serif); font-style:italic; font-size:1.1rem;
+  letter-spacing:.05em; color:var(--ulfa-magenta); font-weight:400;
+}
+.eyebrow::after{ content:""; width:2.6rem; height:1px; background:var(--ulfa-line); }
+
+h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; color:var(--ulfa-brown); }
+.display{
+  font-size:clamp(2.5rem, 5vw, 4.4rem);
+  line-height:1.08; letter-spacing:-.01em; font-weight:400;
+}
+.display em{ font-style:italic; font-weight:300; color:var(--ulfa-magenta); }
+.lede{ max-width:48ch; color:var(--ulfa-umber); font-size:1.05rem; font-weight:300; }
+
+/* ================================================================
+   04 · HEADER
+   ================================================================ */
+.site-header{
+  position:sticky; top:0; z-index:80;
+  background:rgba(255,255,255,.9);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;
+  transition:border-color .4s, box-shadow .4s;
+}
+.site-header.is-scrolled{ border-bottom-color:var(--ulfa-line-soft); box-shadow:0 10px 40px -24px rgba(0,0,0,.08); }
+.header-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1.5rem; padding-block:1rem;
+}
+.brand{ display:flex; align-items:center; text-decoration:none; }
+.brand-logo{ height:42px; width:auto; mix-blend-mode:multiply; }
+
+.main-nav{ display:flex; gap:2.5rem; }
+.main-nav a{
+  position:relative; text-decoration:none;
+  font-size:.7rem; font-weight:500; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ulfa-brown); padding-block:.4rem;
+}
+.main-nav a::after{
+  content:""; position:absolute; left:0; bottom:0; width:100%; height:1px;
+  background:var(--ulfa-terra); transform:scaleX(0); transform-origin:right;
+  transition:transform .45s var(--ease-out);
+}
+.main-nav a:hover::after, .main-nav a:focus-visible::after{ transform:scaleX(1); transform-origin:left; }
+@media (max-width:900px){ .main-nav{ display:none; } }
+
+.header-actions{ display:flex; align-items:center; gap:1rem; }
+@media (max-width:480px){ .header-actions .btn{ padding:.6rem .95rem; font-size:.68rem; } }
+
+.burger{
+  display:none; width:44px; height:44px; border:1px solid var(--ulfa-line);
+  background:transparent; border-radius:50%;
+  align-items:center; justify-content:center; color:var(--ulfa-brown);
+}
+@media (max-width:900px){ .burger{ display:inline-flex; } }
+
+/* mobile menu */
+.mobile-menu{
+  position:fixed; inset:0; z-index:120; background:var(--ulfa-white);
+  display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(1.5rem,6vw,4rem);
+  opacity:0; visibility:hidden; transition:opacity .4s var(--ease-out), visibility .4s;
+}
+.mobile-menu.open{ opacity:1; visibility:visible; }
+.mobile-menu .mclose{
+  position:absolute; top:1.1rem; right:clamp(1rem,4vw,2.5rem);
+  width:48px; height:48px; border:1px solid var(--ulfa-line); border-radius:50%;
+  background:transparent; display:inline-flex; align-items:center; justify-content:center; color:var(--ulfa-brown);
+}
+.mobile-menu nav{ display:flex; flex-direction:column; }
+.mobile-menu nav a{
+  font-family:var(--serif); font-size:clamp(2rem,8.5vw,3.2rem); font-weight:400;
+  color:var(--ulfa-brown); text-decoration:none; padding:.6rem 0;
+  display:flex; align-items:baseline; gap:1.2rem;
+  border-bottom:1px solid var(--ulfa-line-soft);
+  transform:translateY(14px); opacity:0; transition:transform .5s var(--ease-out), opacity .5s;
+}
+.mobile-menu.open nav a{ transform:none; opacity:1; }
+.mobile-menu.open nav a:nth-child(1){transition-delay:.08s}
+.mobile-menu.open nav a:nth-child(2){transition-delay:.14s}
+.mobile-menu.open nav a:nth-child(3){transition-delay:.2s}
+.mobile-menu.open nav a:nth-child(4){transition-delay:.26s}
+.mobile-menu.open nav a:nth-child(5){transition-delay:.32s}
+.mobile-menu nav a .arabic{ font-size:.55em; color:var(--ulfa-magenta); font-family:var(--arabic); }
+.mobile-menu .menu-foot{ margin-top:3rem; display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center; justify-content:space-between; }
+.mobile-menu .menu-foot img{ height:36px; width:auto; mix-blend-mode:multiply; }
+
+/* ================================================================
+   05 · BUTTONS & SMALL UI
+   ================================================================ */
+.btn{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-size:.7rem; font-weight:500; letter-spacing:.24em; text-transform:uppercase;
+  padding:.85rem 1.8rem; text-decoration:none; border:1px solid transparent;
+  transition:background .35s, color .35s, border-color .35s, transform .35s var(--ease-out);
+}
+.btn svg{ width:15px; height:15px; transition:transform .35s var(--ease-out); }
+.btn:hover svg{ transform:translateX(3px); }
+.btn-terra{ background:var(--ulfa-brown); color:var(--ulfa-white); border-color:var(--ulfa-brown); }
+.btn-terra:hover{ background:var(--ulfa-magenta); border-color:var(--ulfa-magenta); }
+.btn-ghost{ background:transparent; color:var(--ulfa-brown); border-color:var(--ulfa-line); }
+.btn-ghost:hover{ background:var(--ulfa-porcelain); border-color:var(--ulfa-magenta); color:var(--ulfa-magenta); }
+.btn-light{ background:var(--ulfa-white); color:var(--ulfa-brown); border-color:var(--ulfa-white); }
+.btn-light:hover{ background:var(--ulfa-peach-2); border-color:var(--ulfa-peach-2); }
+
+.linklike{
+  background:none; border:none; padding:0; color:var(--ulfa-umber);
+  font-size:.7rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase;
+  border-bottom:1px solid var(--ulfa-line); padding-bottom:.3rem;
+  transition:color .3s, border-color .3s;
+}
+.linklike:hover{ color:var(--ulfa-magenta); border-color:var(--ulfa-magenta); }
+
+.star{ width:14px; height:14px; color:var(--ulfa-terra); flex:none; }
+.star--magenta{ color:var(--ulfa-magenta); }
+
+/* ================================================================
+   06 · HERO — opening page of the publication
+   ================================================================ */
+.hero{
+  position:relative;
+  display:grid; grid-template-columns:minmax(0,6fr) minmax(0,6fr);
+  gap:clamp(3rem,6vw,6rem); align-items:center;
+  padding-block:clamp(3rem,8vh,6rem) clamp(3rem,7vh,5rem);
+}
+.hero-logo{
+  max-height:85px; width:auto; max-width:100%; mix-blend-mode:multiply;
+  margin-bottom:2.5rem;
+}
+.hero h1{ margin-top:0; }
+.hero .lede{ margin-top:1.5rem; }
+.hero-ctas{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.5rem; }
+
+/* hero botanical arch */
+.hero-fig{ position:relative; margin:0; }
+.hero-fig::before{
+  content:""; position:absolute; inset:0;
+  transform:translate(16px,16px);
+  border:1px solid var(--ulfa-terra);
+  border-radius:15rem 15rem 0 0;
+  pointer-events:none;
+}
+.hero-media{
+  position:relative; overflow:hidden;
+  border-radius:15rem 15rem 0 0;
+  aspect-ratio:3/4;
+  border:1px solid var(--ulfa-line);
+  background:var(--ulfa-peach-2);
+}
+.hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:contrast(1.05) brightness(0.98); }
+.hero-media::after{
+  content:""; position:absolute; inset:12px; pointer-events:none;
+  border:1px solid rgba(255,255,255,.6); border-radius:14rem 14rem 0 0;
+}
+.hero-caption{
+  display:flex; align-items:center; gap:.7rem; margin-top:1.2rem;
+  font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber);
+}
+.hero-star-a{ position:absolute; top:-14px; left:-14px; width:34px; height:34px; color:var(--ulfa-magenta); }
+.hero-star-b{ position:absolute; bottom:22%; right:-18px; width:22px; height:22px; color:var(--ulfa-terra); }
+
+.scroll-cue{
+  grid-column:1/-1; display:flex; align-items:center; gap:1.2rem;
+  margin-top:clamp(1.5rem,4vh,3rem);
+  font-size:.64rem; letter-spacing:.42em; text-transform:uppercase; color:var(--ulfa-umber);
+}
+.scroll-cue .cue-line{
+  width:1px; height:44px; background:var(--ulfa-line); position:relative; overflow:hidden;
+}
+.scroll-cue .cue-line::after{
+  content:""; position:absolute; left:0; top:-100%; width:100%; height:100%;
+  background:var(--ulfa-magenta); animation:cueDrop 2.6s var(--ease-out) infinite;
+}
+@keyframes cueDrop{ 0%{top:-100%} 55%{top:100%} 100%{top:100%} }
+
+@media (max-width:900px){
+  .hero{ grid-template-columns:1fr; gap:3.5rem; }
+  .hero-fig{ max-width:440px; margin: 0 auto; }
+  .hero-media{ aspect-ratio:4/5; }
+  .hero-logo{ max-height:70px; margin-bottom: 2rem; }
+}
+
+/* ================================================================
+   07 · VERIFICATION BAR
+   ================================================================ */
+.verification-bar {
+  padding: 1.8rem 0;
+  border-block: 1px solid var(--ulfa-line-soft);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ulfa-umber);
+  background: var(--ulfa-white);
+}
+.verification-bar .wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  flex-wrap: wrap;
+  text-align: center;
+}
+.verification-bar .dot { color: var(--ulfa-magenta); font-size: 1.2em; line-height: 0; }
+
+/* ================================================================
+   08 · RIBBON — fragrance marquee
+   ================================================================ */
+.ribbon{
+  background:var(--ulfa-magenta); color:var(--ulfa-white);
+  overflow:hidden; padding:.9rem 0;
+  border-block:1px solid var(--ulfa-magenta);
+}
+.ribbon-track{ display:flex; width:max-content; animation:marquee 36s linear infinite; }
+.ribbon-track:hover{ animation-play-state:paused; }
+.ribbon-group{ display:flex; align-items:center; gap:2.6rem; padding-right:2.6rem; }
+.ribbon-group span{
+  font-size:.72rem; font-weight:400; letter-spacing:.34em; text-transform:uppercase;
+  color:var(--ulfa-white); white-space:nowrap;
+}
+.ribbon-group .star{ color:var(--ulfa-peach); }
+@keyframes marquee{ to{ transform:translateX(-50%); } }
+
+/* ================================================================
+   09 · SECTION FRAME
+   ================================================================ */
+.section{ padding-block:clamp(5rem,12vh,9rem); }
+.section-head{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,28rem);
+  gap:2.5rem; align-items:end; margin-bottom:clamp(3rem,8vw,5rem);
+  padding-bottom:1.8rem; border-bottom:1px solid var(--ulfa-line-soft);
+}
+.section-head .lede{ margin:0; justify-self:end; }
+@media (max-width:820px){ .section-head{ grid-template-columns:1fr; align-items:start; } .section-head .lede{ justify-self:start; } }
+
+/* ================================================================
+   10 · COLLECTION — editorial chapters
+   ================================================================ */
+.filters{
+  display:flex; flex-wrap:wrap; gap:.5rem 2.5rem; align-items:baseline;
+  margin-bottom:clamp(3rem,7vw,5rem);
+}
+.filter-btn{
+  background:none; border:none; padding:.45rem 0;
+  font-size:.75rem; font-weight:500; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ulfa-umber); position:relative; transition:color .3s;
+}
+.filter-btn sup{ font-family:var(--serif); font-style:italic; letter-spacing:0; color:var(--ulfa-terra); margin-left:.35rem; font-size:.9em; }
+.filter-btn::after{
+  content:""; position:absolute; left:0; bottom:0; height:1px; width:100%;
+  background:var(--ulfa-magenta); transform:scaleX(0); transform-origin:right;
+  transition:transform .45s var(--ease-out);
+}
+.filter-btn:hover{ color:var(--ulfa-brown); }
+.filter-btn.active{ color:var(--ulfa-brown); }
+.filter-btn.active::after{ transform:scaleX(1); transform-origin:left; }
+
+#galleryWrap{ transition:opacity .25s ease, transform .25s ease; }
+#galleryWrap.fade-out{ opacity:0; transform:translateY(12px); }
+
+.chapter{ margin-bottom:clamp(4.5rem,10vw,7.5rem); }
+.chapter:last-child{ margin-bottom:1rem; }
+.chapter-head{
+  display:grid; grid-template-columns:auto 1fr auto; align-items:baseline; gap:1.8rem;
+  padding-bottom:1.5rem; border-bottom:1px solid var(--ulfa-line);
+  margin-bottom:clamp(2.5rem,6vw,4rem);
+}
+.chapter-numeral{
+  font-family:var(--serif); font-style:italic; font-size:clamp(2.8rem,5vw,3.8rem);
+  color:var(--ulfa-terra); line-height:1; font-weight:300;
+}
+.chapter-name{ font-size:clamp(1.8rem,3.6vw,2.6rem); letter-spacing:.01em; color:var(--ulfa-brown); font-weight:400; }
+.chapter-blurb{
+  font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ulfa-umber);
+  max-width:26ch; text-align:right; font-weight:400;
+}
+@media (max-width:700px){ .chapter-blurb{ display:none; } }
+
+.chapter-grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(2rem,4vw,3.5rem) clamp(1.5rem,3vw,2.5rem); }
+.chapter--duo .product:nth-child(1){ grid-column:1 / span 5; }
+.chapter--duo .product:nth-child(2){ grid-column:7 / span 5; margin-top:clamp(2.5rem,6vw,5.5rem); }
+.chapter--trio .product:nth-child(1){ grid-column:1 / span 4; }
+.chapter--trio .product:nth-child(2){ grid-column:5 / span 4; margin-top:clamp(2rem,5vw,4.5rem); }
+.chapter--trio .product:nth-child(3){ grid-column:9 / span 4; }
+@media (max-width:840px){
+  .chapter-grid{ grid-template-columns:1fr; gap:3.5rem; }
+  .chapter .product{ grid-column:1 / -1 !important; margin-top:0 !important; max-width:480px; }
+}
+
+/* product */
+.product-media{
+  position:relative; display:block; width:100%; padding:0; border:none;
+  background:transparent; overflow:visible; text-align:inherit;
+}
+.product-media .plate{
+  position:relative; overflow:hidden; border:1px solid var(--ulfa-line-soft);
+  background: var(--ulfa-porcelain);
+  aspect-ratio:4/5;
+  display:flex; align-items:center; justify-content:center;
+}
+.product-media.frame-arch .plate{ border-radius:14rem 14rem 0 0; }
+.product-media .plate::after{
+  content:""; position:absolute; inset:12px; pointer-events:none;
+  border:1px solid var(--ulfa-line-soft);
+}
+.product-media.frame-arch .plate::after{ border-radius:13rem 13rem 0 0; }
+.product-media img{
+  width:84%; height:84%; object-fit:contain;
+  transition:transform .8s var(--ease-out);
+  filter:drop-shadow(0 15px 25px rgba(0,0,0,.04));
+}
+.product-media:hover img, .product-media:focus-visible img{ transform:scale(1.045) translateY(-5px); }
+.media-tag{
+  position:absolute; right:14px; bottom:14px; z-index:2;
+  background:var(--ulfa-brown); color:var(--ulfa-white);
+  font-size:.62rem; letter-spacing:.3em; text-transform:uppercase;
+  padding:.5rem 1rem; opacity:0; transform:translateY(8px);
+  transition:opacity .35s, transform .35s var(--ease-out); pointer-events:none;
+}
+.product-media:hover .media-tag, .product-media:focus-visible .media-tag{ opacity:1; transform:none; }
+@media (hover:none){ .media-tag{ opacity:1; transform:none; } }
+
+.product-meta{ padding-top:1.25rem; }
+.meta-top{
+  display:flex; justify-content:space-between; align-items:baseline;
+  font-size:.66rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber);
+  padding-bottom:.6rem;
+}
+.meta-top .p-num{ color:var(--ulfa-magenta); font-style:italic; font-family:var(--serif); letter-spacing:.06em; font-size:.95rem; text-transform:none; }
+.product-meta h3{ font-size:1.75rem; line-height:1.15; }
+.p-note{ margin:.3rem 0 0; font-family:var(--serif); font-style:italic; font-size:1.1rem; color:var(--ulfa-terra); }
+.p-row{
+  display:flex; align-items:center; gap:1rem; margin-top:.8rem;
+  font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--ulfa-umber);
+}
+.p-row .dash{ flex:1; height:1px; background:var(--ulfa-line-soft); }
+.p-row .price{ font-family:var(--serif); font-size:1.2rem; letter-spacing:.04em; color:var(--ulfa-brown); text-transform:none; }
+.p-actions{ display:flex; align-items:center; gap:1.6rem; margin-top:1.4rem; flex-wrap:wrap; }
+
+/* ================================================================
+   11 · INTERLUDE & FINALE BANDS
+   ================================================================ */
+.band{ position:relative; }
+.band img{
+  width:100%; height:clamp(360px,56vh,620px); object-fit:cover; object-position:center 62%;
+}
+.band-caption{
+  position:absolute; left:clamp(1rem,6vw,6rem); bottom:-1px;
+  background:var(--ulfa-white); padding:1.25rem 1.8rem;
+  display:flex; align-items:baseline; gap:1.2rem;
+  border:1px solid var(--ulfa-line-soft); border-bottom:none;
+}
+.band-caption strong{ font-family:var(--serif); font-style:italic; font-weight:400; font-size:1.2rem; letter-spacing:.02em; color:var(--ulfa-brown); }
+.band-caption span{ font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber); }
+@media (max-width:640px){ .band-caption{ left:1rem; right:1rem; } }
+
+.finale img{ height:clamp(280px,42vh,460px); object-position:center 70%; }
+
+/* ================================================================
+   12 · FRAGRANCE NOTES
+   ================================================================ */
+.notes{ background:var(--ulfa-porcelain); border-block:1px solid var(--ulfa-line-soft); }
+.notes-grid{
+  display:grid; grid-template-columns:minmax(0,3fr) minmax(0,3fr) minmax(0,3fr) minmax(0,3fr);
+  gap:clamp(2rem,4.5vw,4rem); align-items:start;
+}
+.notes-fig{ margin:0; position:relative; }
+.notes-fig .plate{
+  border:1px solid var(--ulfa-line); aspect-ratio:4/5; overflow:hidden; background:var(--ulfa-white);
+}
+.notes-fig img{ width:100%; height:100%; object-fit:cover; object-position:center; transition:transform 1.2s var(--ease-out); }
+.notes-fig:hover img{ transform:scale(1.05); }
+.notes-fig figcaption{
+  margin-top:1.1rem; font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber);
+  display:flex; gap:.8rem; align-items:center;
+}
+.note-item{ border-top:1px solid var(--ulfa-terra); padding-top:1.6rem; }
+.note-item .ar{ font-family:var(--arabic); font-size:2.3rem; color:var(--ulfa-magenta); line-height:1.15; }
+.note-item h3{ font-size:2rem; margin-top:.5rem; font-weight:400; }
+.note-item .gloss{
+  font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber); margin-top:.4rem;
+}
+.note-item .pair{
+  font-family:var(--serif); font-style:italic; font-size:1.25rem; color:var(--ulfa-terra); margin-top:1.2rem;
+}
+.note-item p.desc{ font-size:.95rem; color:var(--ulfa-umber); margin:.8rem 0 0; max-width:30ch; font-weight:300; }
+@media (max-width:1024px){
+  .notes-grid{ grid-template-columns:1fr 1fr; }
+  .notes-fig{ order:-1; grid-column:1/-1; max-width:460px; }
+}
+@media (max-width:620px){ .notes-grid{ grid-template-columns:1fr; } }
+
+/* ================================================================
+   13 · RITUAL
+   ================================================================ */
+.ritual-grid{
+  display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr);
+  gap:clamp(3rem,7vw,6.5rem); align-items:center;
+}
+.ritual-fig{ position:relative; margin:0; }
+.ritual-fig::before{
+  content:""; position:absolute; inset:0; transform:translate(-16px,-16px);
+  background:var(--ulfa-peach-2); z-index:-1; border:1px solid var(--ulfa-line-soft);
+}
+.ritual-fig .plate{ border:1px solid var(--ulfa-line); aspect-ratio:3/4; overflow:hidden; }
+.ritual-fig img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:contrast(1.02); }
+.ritual-fig figcaption{
+  margin-top:1.1rem; font-size:.64rem; letter-spacing:.32em; text-transform:uppercase; color:var(--ulfa-umber);
+  display:flex; gap:.8rem; align-items:center;
+}
+.ritual-copy h2{ margin:.9rem 0 1.2rem; }
+.ritual-copy p{ color:var(--ulfa-umber); max-width:54ch; font-weight:300; font-size:1.05rem; margin-bottom:1rem; }
+.ritual-steps{ margin-top:2.6rem; border-top:1px solid var(--ulfa-line); }
+.ritual-step{
+  display:grid; grid-template-columns:auto 1fr auto; gap:1.6rem; align-items:baseline;
+  padding:1.2rem 0; border-bottom:1px solid var(--ulfa-line-soft);
+}
+.ritual-step .roman{ font-family:var(--serif); font-style:italic; color:var(--ulfa-magenta); font-size:1.2rem; }
+.ritual-step .step-name{ font-family:var(--serif); font-size:1.4rem; color:var(--ulfa-brown); }
+.ritual-step .step-cat{ font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; color:var(--ulfa-umber); }
+@media (max-width:900px){ .ritual-grid{ grid-template-columns:1fr; } .ritual-fig{ max-width:440px; margin: 0 auto; } }
+
+/* ================================================================
+   14 · FROM THE LABEL
+   ================================================================ */
+.label-section .label-card{
+  border:1px solid var(--ulfa-line); background:var(--ulfa-porcelain);
+  padding:clamp(2.5rem,6vw,4.5rem);
+  position:relative;
+}
+.label-head{ text-align:center; max-width:600px; margin:0 auto 2.5rem; }
+.label-head .star{ width:18px; height:18px; }
+.acc{ border-top:1px solid var(--ulfa-line); }
+.acc details{ border-bottom:1px solid var(--ulfa-line); }
+.acc summary{
+  list-style:none; display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  padding:1.25rem .2rem; cursor:pointer;
+  font-size:.78rem; font-weight:500; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ulfa-brown);
+}
+.acc summary::-webkit-details-marker{ display:none; }
+.acc summary .star{ transition:transform .4s var(--ease-out); }
+.acc details[open] summary .star{ transform:rotate(45deg); color:var(--ulfa-magenta); }
+.acc .acc-body{ padding:0 .2rem 1.6rem; max-width:75ch; color:var(--ulfa-umber); font-size:1rem; font-weight:300; }
+.acc .acc-body p{ margin:.4rem 0; }
+.acc .acc-body strong { font-weight: 500; letter-spacing: 0.1em; color: var(--ulfa-brown); font-size: 0.85rem; display: block; margin-bottom: 0.5rem; }
+.label-foot{
+  margin-top:2rem; text-align:center;
+  font-family:var(--serif); font-style:italic; font-size:1rem; color:var(--ulfa-umber);
+}
+
+/* ================================================================
+   15 · FOOTER
+   ================================================================ */
+.site-footer{ background:var(--ulfa-white); color:var(--ulfa-brown); position:relative; overflow:hidden; border-top: 1px solid var(--ulfa-line-soft); }
+.footer-inner{ position:relative; padding:clamp(4rem,9vw,7.5rem) 0 2rem; }
+.footer-cols{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:3rem; max-width:960px; margin:0 auto; text-align:center;
+}
+.footer-cols h4{
+  font-family:var(--sans); font-weight:500; font-size:.68rem; letter-spacing:.36em;
+  text-transform:uppercase; color:var(--ulfa-brown); margin:0 0 1.2rem;
+}
+.footer-cols ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.8rem; }
+.footer-cols a{
+  color:var(--ulfa-umber); text-decoration:none; font-size:.95rem; font-weight:300;
+  transition:color .3s;
+}
+.footer-cols a:hover{ color:var(--ulfa-magenta); }
+.footer-cols .ar{ font-family:var(--arabic); color:var(--ulfa-magenta); font-size:1.15rem; }
+.footer-bottom{
+  margin-top:4rem; padding-top:1.8rem; border-top:1px solid var(--ulfa-line-soft);
+  display:flex; flex-wrap:wrap; gap:1rem 2.5rem; justify-content:space-between; align-items:center;
+  font-size:.7rem; letter-spacing:.26em; text-transform:uppercase; color:var(--ulfa-umber);
+}
+.footer-bottom .ar{ font-family:var(--arabic); text-transform:none; letter-spacing:0; font-size:1.05rem; color:var(--ulfa-magenta); }
+@media (max-width:760px){ .footer-cols{ grid-template-columns:1fr; gap:2.5rem; } }
+
+/* ================================================================
+   16 · PRODUCT MODAL
+   ================================================================ */
+.modal{ position:fixed; inset:0; z-index:150; display:flex; align-items:center; justify-content:center; padding:clamp(.8rem,3vw,2.5rem); }
+.modal[hidden]{ display:none; }
+.modal-backdrop{ position:absolute; inset:0; background:rgba(26,24,23,.65); backdrop-filter:blur(8px); opacity:0; transition:opacity .35s; }
+.modal.open .modal-backdrop{ opacity:1; }
+.modal-panel{
+  position:relative; background:var(--ulfa-white); width:min(1040px,100%);
+  max-height:min(88vh, 900px); overflow:auto;
+  border:1px solid var(--ulfa-line);
+  display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr);
+  opacity:0; transform:translateY(26px) scale(.985);
+  transition:opacity .4s var(--ease-out), transform .4s var(--ease-out);
+  scrollbar-width:thin;
+}
+.modal.open .modal-panel{ opacity:1; transform:none; }
+.modal-close{
+  position:absolute; top:1.1rem; right:1.1rem; z-index:5;
+  display:inline-flex; align-items:center; gap:.6rem;
+  background:var(--ulfa-white); border:1px solid var(--ulfa-line); border-radius:999px;
+  padding:.65rem 1.1rem; font-size:.68rem; letter-spacing:.28em; text-transform:uppercase;
+  transition:background .3s, color .3s; color:var(--ulfa-brown);
+}
+.modal-close:hover{ background:var(--ulfa-brown); color:var(--ulfa-white); }
+.modal-media{
+  position:relative; background: var(--ulfa-porcelain);
+  border-right:1px solid var(--ulfa-line);
+  display:flex; align-items:center; justify-content:center; padding:clamp(2rem,4vw,3.5rem);
+  min-height:360px;
+}
+.modal-media img{ max-height:min(58vh,540px); width:auto; max-width:100%; object-fit:contain; filter:drop-shadow(0 20px 30px rgba(0,0,0,.06)); }
+.modal-body{ padding:clamp(2rem,4vw,3.5rem); }
+.modal-body .eyebrow{ margin-bottom:1rem; }
+.modal-body h3{ font-size:clamp(2rem,3.6vw,2.8rem); line-height:1.1; font-weight:400; }
+.modal-body .p-note{ font-size:1.25rem; color:var(--ulfa-terra); }
+.modal-body .p-row{ max-width:360px; }
+.modal-body .btn{ margin-top:1.5rem; }
+.modal-acc{ margin-top:2rem; }
+.modal-note{
+  margin-top:1.6rem; font-family:var(--serif); font-style:italic; font-size:1.05rem; color:var(--ulfa-umber);
+  border-top:1px solid var(--ulfa-line-soft); padding-top:1.2rem;
+}
+@media (max-width:760px){
+  .modal-panel{ grid-template-columns:1fr; max-height:92vh; }
+  .modal-media{ border-right:none; border-bottom:1px solid var(--ulfa-line); min-height:260px; padding:3rem 2rem 2rem; }
+  .modal-media img{ max-height:40vh; }
+}
+
+/* ================================================================
+   17 · IMAGE FALLBACK
+   ================================================================ */
+.is-missing{ position:relative; background:var(--ulfa-peach-2) !important; }
+.is-missing::before{
+  content:""; position:absolute; inset:0; opacity:.25;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='%23BD6635'%3E%3Cpolygon points='28,18 38,28 28,38 18,28'/%3E%3Cpolygon points='21,21 35,21 35,35 21,35'/%3E%3C/g%3E%3C/svg%3E");
+}
+.is-missing::after{ border:none !important; }
+
+/* ================================================================
+   18 · REVEAL ANIMATIONS
+   ================================================================ */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .9s ease var(--d,0s), transform .9s var(--ease-out) var(--d,0s); }
+.reveal.in{ opacity:1; transform:none; }
+.hero-logo, .hero-descriptor, .hero h1, .hero .lede, .hero-ctas, .hero-fig, .hero-arabic{
+  opacity:0; transform:translateY(24px); transition:opacity .95s ease var(--d,0s), transform .95s var(--ease-out) var(--d,0s);
+}
+body.loaded .hero-arabic{ opacity:1; transform:none; }
+body.loaded .hero-logo{ opacity:1; transform:none; --d:.08s; }
+body.loaded .hero h1{ opacity:1; transform:none; --d:.16s; }
+body.loaded .hero .lede{ opacity:1; transform:none; --d:.24s; }
+body.loaded .hero-ctas{ opacity:1; transform:none; --d:.32s; }
+body.loaded .hero-fig{ opacity:1; transform:none; --d:.28s; }
+
+/* ================================================================
+   19 · NOSCRIPT & MISC
+   ================================================================ */
+.noscript-box{ border:1px solid var(--ulfa-line); background:var(--ulfa-porcelain); padding:2.5rem; margin-top:2.5rem; }
+.noscript-box h3{ font-size:1.5rem; margin-bottom:1.2rem; font-weight:400; }
+.noscript-box ul{ list-style:none; padding:0; margin:0; }
+.noscript-box li{ padding:.9rem 0; border-bottom:1px solid var(--ulfa-line-soft); display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:baseline; }
+.noscript-box a{ color:var(--ulfa-magenta); font-weight:500; letter-spacing:.1em; text-transform:uppercase; font-size:0.75rem; }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* ================================================================
+   20 · REDUCED MOTION
+   ================================================================ */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.001s !important; transition-delay:0s !important; }
+  .ribbon-track{ animation:none !important; width:100%; justify-content:center; }
+  .ribbon-group:nth-child(2){ display:none; }
+  .reveal, .hero-logo, .hero-descriptor, .hero h1, .hero .lede, .hero-ctas, .hero-fig, .hero-arabic{ opacity:1 !important; transform:none !important; }
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- shared ornament -->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ulfa-star" viewBox="0 0 24 24">
+    <polygon points="12,2.4 21.6,12 12,21.6 2.4,12"/>
+    <polygon points="4.2,4.2 19.8,4.2 19.8,19.8 4.2,19.8"/>
+  </symbol>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="ÚLFĀ — Arabian Beauty House, back to top">
+      <img src="https://i.imgur.com/J0w9XPe.jpeg" class="brand-logo" alt="ÚLFĀ Arabian Beauty House">
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#collection">Collection</a>
+      <a href="#notes">Notes</a>
+      <a href="#ritual">Ritual</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-terra" id="headerWa" href="https://wa.me/96171109910" target="_blank" rel="noopener">
+        <i data-lucide="message-circle" aria-hidden="true"></i>
+        <span>WhatsApp</span>
+      </a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <i data-lucide="menu" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <button class="mclose" id="menuClose" aria-label="Close menu"><i data-lucide="x" aria-hidden="true"></i></button>
+  <nav aria-label="Mobile">
+    <a href="#collection"><span>Collection</span><span class="arabic">المجموعة</span></a>
+    <a href="#notes"><span>Fragrance Notes</span><span class="arabic">العطور</span></a>
+    <a href="#ritual"><span>The Ritual</span><span class="arabic">الطقوس</span></a>
+    <a href="#label"><span>From the Label</span><span class="arabic">التفاصيل</span></a>
+    <a href="#contact"><span>Contact</span><span class="arabic">التواصل</span></a>
+  </nav>
+  <div class="menu-foot">
+    <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ÚLFĀ Arabian Beauty House">
+    <a class="btn btn-terra" id="menuWa" href="https://wa.me/96171109910" target="_blank" rel="noopener">
+      <i data-lucide="message-circle" aria-hidden="true"></i><span>Order on WhatsApp</span>
+    </a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero wrap" id="top" aria-label="Introduction">
+    <div class="hero-copy">
+      <img src="https://i.imgur.com/J0w9XPe.jpeg" class="hero-logo reveal" alt="ÚLFĀ Arabian Beauty House">
+      <h1 class="display reveal" style="--d:.08s">The quiet ceremony<br>of <em>everyday care</em>.</h1>
+      <p class="lede reveal" style="--d:.16s">A body-care collection composed in three rituals — lotions, mists and scrubs — eight compositions, each finished with restraint, fragrance, and the house’s botanical hand.</p>
+      <div class="hero-ctas reveal" style="--d:.24s">
+        <a class="btn btn-terra" href="#collection">Explore the Collection <i data-lucide="arrow-down" aria-hidden="true"></i></a>
+        <a class="btn btn-ghost" href="#notes">Discover the Notes</a>
+      </div>
+    </div>
+
+    <figure class="hero-fig reveal" style="--d:.12s">
+      <svg class="star hero-star-a" aria-hidden="true"><use href="#ulfa-star"/></svg>
+      <svg class="star hero-star-b" aria-hidden="true"><use href="#ulfa-star"/></svg>
+      <div class="hero-media" data-media>
+        <img src="https://i.imgur.com/tLwolka.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study one" fetchpriority="high" decoding="async">
+      </div>
+      <figcaption class="hero-caption">
+        <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg>
+        <span>Botanical Study Nº 01 · The House Garden</span>
+      </figcaption>
+    </figure>
+
+    <div class="scroll-cue reveal" style="--d:.3s" aria-hidden="true">
+      <span class="cue-line"></span><span>Scroll · The Collection</span>
+    </div>
+  </section>
+
+  <!-- ================= VERIFICATION BAR ================= -->
+  <div class="verification-bar reveal" aria-label="Certifications">
+    <div class="wrap">
+      <span>Paraben Free</span><span class="dot">·</span>
+      <span>GMP</span><span class="dot">·</span>
+      <span>ISO</span><span class="dot">·</span>
+      <span>Made in Lebanon</span>
+    </div>
+  </div>
+
+  <!-- ================= RIBBON ================= -->
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track">
+      <div class="ribbon-group">
+        <span>Nasma — Coconut &amp; Vanilla</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Sukun — Gardenia &amp; Musk</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Areej — Musk &amp; Roses</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Nasma — Coconut &amp; Vanilla</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Sukun — Gardenia &amp; Musk</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Areej — Musk &amp; Roses</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Nasma — Coconut &amp; Vanilla</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Sukun — Gardenia &amp; Musk</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Areej — Musk &amp; Roses</span><svg class="star"><use href="#ulfa-star"/></svg>
+      </div>
+      <div class="ribbon-group">
+        <span>Nasma — Coconut &amp; Vanilla</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Sukun — Gardenia &amp; Musk</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Areej — Musk &amp; Roses</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Nasma — Coconut &amp; Vanilla</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Sukun — Gardenia &amp; Musk</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Areej — Musk &amp; Roses</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Nasma — Coconut &amp; Vanilla</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Sukun — Gardenia &amp; Musk</span><svg class="star"><use href="#ulfa-star"/></svg>
+        <span>Areej — Musk &amp; Roses</span><svg class="star"><use href="#ulfa-star"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= COLLECTION ================= -->
+  <section class="section wrap" id="collection" aria-labelledby="collectionTitle">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow"><span class="num">01</span> The Collection</p>
+        <h2 class="display" id="collectionTitle">Three rituals,<br><em>eight compositions.</em></h2>
+      </div>
+      <p class="lede">Every piece is ordered directly and personally — choose a composition, and continue the conversation on WhatsApp. Nothing more is asked of you.</p>
+    </div>
+
+    <div class="filters reveal" role="group" aria-label="Filter the collection by category">
+      <button class="filter-btn active" data-filter="all" aria-pressed="true">All Products <sup>08</sup></button>
+      <button class="filter-btn" data-filter="lotion" aria-pressed="false">Body Lotion <sup>02</sup></button>
+      <button class="filter-btn" data-filter="mist" aria-pressed="false">Body Mist <sup>03</sup></button>
+      <button class="filter-btn" data-filter="scrub" aria-pressed="false">Body Scrub <sup>03</sup></button>
+    </div>
+    <p class="sr-only" aria-live="polite" id="filterStatus">Showing all eight products.</p>
+
+    <div id="galleryWrap">
+      <div id="gallery"><!-- rendered from the product catalog --></div>
+      <noscript>
+        <div class="noscript-box">
+          <h3>The ÚLFĀ Catalog — order via WhatsApp</h3>
+          <ul>
+            <li><span>Sukun Body Lotion · Body Lotion · 150 ml · $15.70</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Sukun%20Body%20Lotion%0ACategory%3A%20Body%20Lotion%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2F4x0BhyW.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
+            <li><span>Areej Body Lotion · Body Lotion · 150 ml · $15.70</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Areej%20Body%20Lotion%0ACategory%3A%20Body%20Lotion%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2FAYZLaJ6.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
+            <li><span>Nasma Body Mist · Body Mist · 150 ml · $15.70 · Coconut &amp; Vanilla</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Nasma%20Body%20Mist%0ACategory%3A%20Body%20Mist%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2Fx9CLbHu.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
+            <li><span>Areej Body Mist · Body Mist · 150 ml · $15.70 · Musk &amp; Roses</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Areej%20Body%20Mist%0ACategory%3A%20Body%20Mist%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2FNyUo6tO.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
+            <li><span>Sukun Body Mist · Body Mist · 150 ml · $15.70 · Gardenia &amp; Musk</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Sukun%20Body%20Mist%0ACategory%3A%20Body%20Mist%0ASize%3A%20150%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2FooC7WHO.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
+            <li><span>Nasma Body Scrub · Body Scrub · 250 ml · $15.70</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Nasma%20Body%20Scrub%0ACategory%3A%20Body%20Scrub%0ASize%3A%20250%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2FlZWPUos.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
+            <li><span>Sukun Body Scrub · Body Scrub · 250 ml · $15.70</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Sukun%20Body%20Scrub%0ACategory%3A%20Body%20Scrub%0ASize%3A%20250%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2FyDmQ2py.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
+            <li><span>Areej Body Scrub · Body Scrub · 250 ml · $15.70</span><a href="https://wa.me/96171109910?text=Hello!%20I%20would%20like%20to%20order%20the%20following%20product.%0A%0AProduct%3A%20Areej%20Body%20Scrub%0ACategory%3A%20Body%20Scrub%0ASize%3A%20250%20ml%0APrice%3A%20%2415.70%0AProduct%20image%3A%20https%3A%2F%2Fi.imgur.com%2FiueVyWc.jpeg%0A%0APlease%20confirm%20availability%20and%20delivery%20details.%20Thank%20you!" target="_blank" rel="noopener">Order</a></li>
+          </ul>
+        </div>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- ================= INTERLUDE ================= -->
+  <div class="band reveal" data-media>
+    <img src="https://i.imgur.com/fSoUem1.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study two" loading="lazy" decoding="async">
+    <div class="band-caption">
+      <strong>Between gestures, the garden.</strong>
+      <span>Botanical Study Nº 02</span>
+    </div>
+  </div>
+
+  <!-- ================= FRAGRANCE NOTES ================= -->
+  <section class="notes" id="notes" aria-labelledby="notesTitle">
+    <div class="wrap section">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow"><span class="num">02</span> Fragrance Notes</p>
+          <h2 class="display" id="notesTitle">Three names,<br><em>three airs.</em></h2>
+        </div>
+        <p class="lede">Each body mist carries one of the house’s three compositions — named, as everything here is named, in the language of atmosphere.</p>
+      </div>
+
+      <div class="notes-grid">
+        <figure class="notes-fig reveal" data-media>
+          <div class="plate"><img src="https://i.imgur.com/uJLnlLp.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study four" loading="lazy" decoding="async"></div>
+          <figcaption><svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg><span>Study Nº 04</span></figcaption>
+        </figure>
+
+        <div class="note-item reveal" style="--d:.05s">
+          <div class="ar" lang="ar">نسمة</div>
+          <h3>Nasma</h3>
+          <p class="gloss">A soft breeze</p>
+          <p class="pair">Coconut &amp; Vanilla</p>
+          <p class="desc">The warm composition of the three.</p>
+        </div>
+
+        <div class="note-item reveal" style="--d:.14s">
+          <div class="ar" lang="ar">سكون</div>
+          <h3>Sukun</h3>
+          <p class="gloss">Stillness</p>
+          <p class="pair">Gardenia &amp; Musk</p>
+          <p class="desc">The quiet, floral composition.</p>
+        </div>
+
+        <div class="note-item reveal" style="--d:.23s">
+          <div class="ar" lang="ar">أريج</div>
+          <h3>Areej</h3>
+          <p class="gloss">Lingering fragrance</p>
+          <p class="pair">Musk &amp; Roses</p>
+          <p class="desc">The romantic composition of the house.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RITUAL ================= -->
+  <section class="section wrap" id="ritual" aria-labelledby="ritualTitle">
+    <div class="ritual-grid">
+      <figure class="ritual-fig reveal" data-media>
+        <div class="plate"><img src="https://i.imgur.com/U7WEo9Z.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study three" loading="lazy" decoding="async"></div>
+        <figcaption><svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg><span>Botanical Study Nº 03</span></figcaption>
+      </figure>
+      <div class="ritual-copy">
+        <p class="eyebrow reveal"><span class="num">03</span> The Art of the Ritual</p>
+        <h2 class="display reveal" id="ritualTitle" style="--d:.08s">Care is a form<br>of <em>attention.</em></h2>
+        <p class="reveal" style="--d:.16s">A ritual asks for little: warm water, an unhurried minute, a fragrance chosen for the day. ÚLFĀ composes its collection around that minute — three gestures, repeated daily, until the ordinary becomes ceremony.</p>
+        <p class="reveal" style="--d:.22s">Nothing here is complicated. That is precisely the point.</p>
+        <div class="ritual-steps reveal" style="--d:.28s">
+          <div class="ritual-step"><span class="roman">I</span><span class="step-name">Polish</span><span class="step-cat">Body Scrub · 250 ml</span></div>
+          <div class="ritual-step"><span class="roman">II</span><span class="step-name">Soften</span><span class="step-cat">Body Lotion · 150 ml</span></div>
+          <div class="ritual-step"><span class="roman">III</span><span class="step-name">Scent</span><span class="step-cat">Body Mist · 150 ml</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FROM THE LABEL ================= -->
+  <section class="section wrap label-section" id="label" aria-labelledby="labelTitle">
+    <div class="label-card reveal">
+      <div class="label-head">
+        <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ÚLFĀ Arabian Beauty House" style="max-height:65px; width:auto; mix-blend-mode:multiply; margin:0 auto 1.5rem;">
+        <p class="eyebrow" style="margin-top:1rem"><span class="num">04</span> From the Label</p>
+        <h2 class="display" id="labelTitle" style="font-size:clamp(1.9rem,3.6vw,2.8rem)">Body Mist · <em>150 ml</em></h2>
+        <p class="lede" style="margin:1rem auto 0; text-align:center">A lightweight fragrance for everyday wear — the complete product information, exactly as it appears on the packaging.</p>
+      </div>
+      <div class="acc">
+        <details open>
+          <summary>Certifications <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body">
+            <p><strong>PARABEN FREE · GMP · ISO · MADE IN LEBANON</strong></p>
+            <p>Formulated to strict international quality standards, ensuring purity, safety, and an authentic botanical experience without compromise.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Ingredients <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body">
+            <p>Water (Aqua), Alcohol Denat., Fragrance (Parfum), Glycerin, Polysorbate 20, Aloe Barbadensis Leaf Juice, Citric Acid, Sodium Benzoate, Potassium Sorbate, Tocopherol (Vitamin E), Limonene.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Directions <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body">
+            <p>Spray generously onto the body from a distance of 15–20 cm. Reapply throughout the day as desired for an extra burst of freshness.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Storage <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body">
+            <p>Store in a cool, dry place away from direct sunlight.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Caution <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body">
+            <p>For external use only. Avoid contact with eyes. Discontinue use if irritation or rash develops.</p>
+          </div>
+        </details>
+      </div>
+      <p class="label-foot">Reproduced from the ÚLFĀ body-mist packaging, without addition or embellishment.</p>
+    </div>
+  </section>
+
+  <!-- ================= FINALE ================= -->
+  <div class="band finale reveal" data-media>
+    <img src="https://i.imgur.com/pXEmxDS.jpeg" alt="Botanical photograph from the ÚLFĀ editorial garden — study five" loading="lazy" decoding="async">
+    <div class="band-caption">
+      <strong>The house keeps a garden.</strong>
+      <span>Botanical Study Nº 05</span>
+    </div>
+  </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer" id="contact">
+  <div class="wrap footer-inner">
+    
+    <div style="text-align:center; margin-bottom:2.5rem;">
+      <img src="https://i.imgur.com/J0w9XPe.jpeg" alt="ÚLFĀ Arabian Beauty House" style="max-height:100px; width:auto; mix-blend-mode:multiply; margin:0 auto;">
+    </div>
+    
+    <div class="verification-bar" style="border:none; padding:0 0 3.5rem 0;">
+      <div style="display:flex; justify-content:center; align-items:center; gap:clamp(1rem, 3vw, 2.5rem); flex-wrap:wrap;">
+        <span>Paraben Free</span><span class="dot">·</span>
+        <span>GMP</span><span class="dot">·</span>
+        <span>ISO</span><span class="dot">·</span>
+        <span>Made in Lebanon</span>
+      </div>
+    </div>
+
+    <div class="footer-cols">
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#collection">The Collection</a></li>
+          <li><a href="#notes">Fragrance Notes</a></li>
+          <li><a href="#ritual">The Ritual</a></li>
+          <li><a href="#label">From the Label</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>The Collection</h4>
+        <ul>
+          <li><a href="#collection" data-filter-link="lotion">Body Lotion</a></li>
+          <li><a href="#collection" data-filter-link="mist">Body Mist</a></li>
+          <li><a href="#collection" data-filter-link="scrub">Body Scrub</a></li>
+          <li><a href="#collection" data-filter-link="all">All Products</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Order &amp; Enquiries</h4>
+        <ul>
+          <li><a id="footerWa" href="https://wa.me/96171109910" target="_blank" rel="noopener">WhatsApp · +961 71 109 910</a></li>
+          <li><a id="footerWa2" href="https://wa.me/96171109910" target="_blank" rel="noopener">Order a composition</a></li>
+          <li><span class="ar" lang="ar">أُلفة — دار جمال عربية</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> ÚLFĀ · Arabian Beauty House</span>
+      <span class="ar" lang="ar">صُنع بعناية</span>
+      <span>All rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= PRODUCT MODAL ================= -->
+<div class="modal" id="productModal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="pmName">
+    <button class="modal-close" data-close><i data-lucide="x" aria-hidden="true"></i><span>Close</span></button>
+    <div class="modal-media" data-media><img id="pmImg" src="" alt=""></div>
+    <div class="modal-body">
+      <p class="eyebrow"><span class="num" id="pmNum">№ 01</span><span id="pmCat">Body Lotion</span></p>
+      <h3 id="pmName">Product name</h3>
+      <p class="p-note" id="pmNote"></p>
+      <div class="p-row"><span id="pmSize">150 ml</span><span class="dash"></span><span class="price" id="pmPrice">$15.70</span></div>
+      <a class="btn btn-terra" id="pmOrder" href="https://wa.me/96171109910" target="_blank" rel="noopener">
+        <i data-lucide="message-circle" aria-hidden="true"></i><span>Order on WhatsApp</span>
+      </a>
+      <div class="modal-acc acc" id="pmAcc" hidden>
+        <details open>
+          <summary>Certifications <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body"><p><strong>PARABEN FREE · GMP · ISO · MADE IN LEBANON</strong></p><p>Formulated to strict international quality standards.</p></div>
+        </details>
+        <details>
+          <summary>Ingredients <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body"><p>Water (Aqua), Alcohol Denat., Fragrance (Parfum), Glycerin, Polysorbate 20, Aloe Barbadensis Leaf Juice, Citric Acid, Sodium Benzoate, Potassium Sorbate, Tocopherol (Vitamin E), Limonene.</p></div>
+        </details>
+        <details>
+          <summary>Directions <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body"><p>Spray generously onto the body from a distance of 15–20 cm. Reapply throughout the day as desired for an extra burst of freshness.</p></div>
+        </details>
+        <details>
+          <summary>Storage <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body"><p>Store in a cool, dry place away from direct sunlight.</p></div>
+        </details>
+        <details>
+          <summary>Caution <svg class="star" aria-hidden="true"><use href="#ulfa-star"/></svg></summary>
+          <div class="acc-body"><p>For external use only. Avoid contact with eyes. Discontinue use if irritation or rash develops.</p></div>
+        </details>
+      </div>
+      <p class="modal-note" id="pmGeneric">Complete usage guidance and quality certifications are printed on its packaging.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+/* ================================================================
+   EDIT HERE · 01 — WHATSAPP
+   ================================================================ */
+const WA_NUMBER = '96171109910'; // international format, no '+'
+
+/* ================================================================
+   EDIT HERE · 02 — OFFICIAL PRODUCT CATALOG
+   name · category · cat (lotion|mist|scrub) · size · price · image
+   fragrance — body mists only, per the packaging artwork
+   ================================================================ */
+const PRODUCTS = [
+  { id:'lotion-sukun', name:'Sukun Body Lotion', category:'Body Lotion', cat:'lotion', size:'150 ml', price:'$15.70', image:'https://i.imgur.com/4x0BhyW.jpeg' },
+  { id:'lotion-areej', name:'Areej Body Lotion', category:'Body Lotion', cat:'lotion', size:'150 ml', price:'$15.70', image:'https://i.imgur.com/AYZLaJ6.jpeg' },
+  { id:'mist-nasma',   name:'Nasma Body Mist',   category:'Body Mist',   cat:'mist',   size:'150 ml', price:'$15.70', image:'https://i.imgur.com/x9CLbHu.jpeg', fragrance:'Coconut & Vanilla' },
+  { id:'mist-areej',   name:'Areej Body Mist',   category:'Body Mist',   cat:'mist',   size:'150 ml', price:'$15.70', image:'https://i.imgur.com/NyUo6tO.jpeg', fragrance:'Musk & Roses' },
+  { id:'mist-sukun',   name:'Sukun Body Mist',   category:'Body Mist',   cat:'mist',   size:'150 ml', price:'$15.70', image:'https://i.imgur.com/ooC7WHO.jpeg', fragrance:'Gardenia & Musk' },
+  { id:'scrub-nasma',  name:'Nasma Body Scrub',  category:'Body Scrub',  cat:'scrub',  size:'250 ml', price:'$15.70', image:'https://i.imgur.com/lZWPUos.jpeg' },
+  { id:'scrub-sukun',  name:'Sukun Body Scrub',  category:'Body Scrub',  cat:'scrub',  size:'250 ml', price:'$15.70', image:'https://i.imgur.com/yDmQ2py.jpeg' },
+  { id:'scrub-areej',  name:'Areej Body Scrub',  category:'Body Scrub',  cat:'scrub',  size:'250 ml', price:'$15.70', image:'https://i.imgur.com/iueVyWc.jpeg' }
+];
+
+/* Chapter presentation for each category */
+const CHAPTERS = {
+  lotion:{ numeral:'I',   blurb:'A silken finish to the daily ritual', variant:'duo' },
+  mist:  { numeral:'II',  blurb:'Lightweight fragrance for everyday wear', variant:'trio' },
+  scrub: { numeral:'III', blurb:'Where the ritual begins', variant:'trio' }
+};
+const CAT_ORDER = ['lotion','mist','scrub'];
+
+/* Frame rhythm per chapter position: arch / rectangle alternation */
+const FRAME_MAP = { duo:['arch','rect'], trio:['rect','arch','rect'] };
+const FRAME_MAP_SCRUB = ['arch','rect','arch'];
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ================================================================
+   WHATSAPP MESSAGE BUILDER
+   ================================================================ */
+function waLink(p){
+  const msg =
+`Hello! I would like to order the following product.
+
+Product: ${p.name}
+Category: ${p.category}
+Size: ${p.size}
+Price: ${p.price}
+Product image: ${p.image}
+
+Please confirm availability and delivery details. Thank you!`;
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+const GENERAL_MSG = encodeURIComponent('Hello! I would like to know more about ÚLFĀ — Arabian Beauty House products.');
+const GENERAL_WA = `https://wa.me/${WA_NUMBER}?text=${GENERAL_MSG}`;
+['headerWa','menuWa','footerWa','footerWa2'].forEach(id=>{
+  const el = document.getElementById(id); if(el) el.href = GENERAL_WA;
+});
+
+/* ================================================================
+   GALLERY RENDERER
+   ================================================================ */
+const gallery = document.getElementById('gallery');
+const filterStatus = document.getElementById('filterStatus');
+
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function productCard(p, i, frame){
+  const frag = p.fragrance ? `<p class="p-note">${p.fragrance}</p>` : '';
+  return `
+  <article class="product reveal" style="--d:${(i*0.07).toFixed(2)}s">
+    <button class="product-media frame-${frame}" data-media data-details="${p.id}" aria-label="Open product details — ${p.name}">
+      <span class="plate"><img src="${p.image}" alt="${p.name} — ÚLFĀ ${p.category}, ${p.size}" loading="lazy" decoding="async"></span>
+      <span class="media-tag" aria-hidden="true">View Details</span>
+    </button>
+    <div class="product-meta">
+      <div class="meta-top"><span class="p-num">№ ${pad(i+1)}</span><span>${p.category}</span></div>
+      <h3>${p.name}</h3>
+      ${frag}
+      <div class="p-row"><span>${p.size}</span><span class="dash"></span><span class="price">${p.price}</span></div>
+      <div class="p-actions">
+        <a class="btn btn-terra" href="${waLink(p)}" target="_blank" rel="noopener" aria-label="Order ${p.name} on WhatsApp">
+          <i data-lucide="message-circle" aria-hidden="true"></i><span>Order</span>
+        </a>
+        <button class="linklike" data-details="${p.id}">Product Details</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderGallery(filter){
+  const cats = filter === 'all' ? CAT_ORDER : [filter];
+  let html = '', count = 0;
+  cats.forEach(cat=>{
+    const items = PRODUCTS.filter(p=>p.cat===cat);
+    const meta = CHAPTERS[cat];
+    const frames = (cat==='scrub') ? FRAME_MAP_SCRUB : FRAME_MAP[meta.variant];
+    const cards = items.map((p,idx)=>{
+      const globalIdx = PRODUCTS.indexOf(p);
+      count++;
+      return productCard(p, globalIdx, frames[idx % frames.length]);
+    }).join('');
+    html += `
+    <section class="chapter chapter--${meta.variant}" aria-label="${items[0] ? items[0].category : ''}">
+      <header class="chapter-head">
+        <span class="chapter-numeral">${meta.numeral}</span>
+        <h3 class="chapter-name">${items[0] ? items[0].category : ''}</h3>
+        <p class="chapter-blurb">${meta.blurb}</p>
+      </header>
+      <div class="chapter-grid">${cards}</div>
+    </section>`;
+  });
+  gallery.innerHTML = html;
+  const label = filter==='all' ? `Showing all ${count} products.` : `Showing ${count} products in ${cats[0]==='lotion'?'Body Lotion':cats[0]==='mist'?'Body Mist':'Body Scrub'}.`;
+  filterStatus.textContent = label;
+  if(window.lucide) lucide.createIcons();
+  observeReveals(gallery);
+}
+
+/* ================================================================
+   FILTERS
+   ================================================================ */
+const galleryWrap = document.getElementById('galleryWrap');
+const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+let currentFilter = 'all';
+
+function setActiveFilterBtn(filter){
+  filterBtns.forEach(b=>{
+    const on = b.dataset.filter===filter;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+}
+function applyFilter(filter){
+  if(filter===currentFilter) return;
+  currentFilter = filter;
+  if(reduceMotion){ renderGallery(filter); return; }
+  galleryWrap.classList.add('fade-out');
+  window.setTimeout(()=>{ renderGallery(filter); galleryWrap.classList.remove('fade-out'); }, 220);
+}
+filterBtns.forEach(btn=> btn.addEventListener('click', ()=>{
+  setActiveFilterBtn(btn.dataset.filter); applyFilter(btn.dataset.filter);
+}));
+
+/* footer category shortcuts */
+document.querySelectorAll('[data-filter-link]').forEach(a=>{
+  a.addEventListener('click', ()=>{ setActiveFilterBtn(a.dataset.filterLink); applyFilter(a.dataset.filterLink); });
+});
+
+/* ================================================================
+   PRODUCT MODAL
+   ================================================================ */
+const modal = document.getElementById('productModal');
+const panel = modal.querySelector('.modal-panel');
+let lastFocused = null;
+
+function openModal(id){
+  const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+  lastFocused = document.activeElement;
+  document.getElementById('pmNum').textContent = '№ ' + pad(PRODUCTS.indexOf(p)+1);
+  document.getElementById('pmCat').textContent = p.category;
+  document.getElementById('pmName').textContent = p.name;
+  document.getElementById('pmSize').textContent = p.size;
+  document.getElementById('pmPrice').textContent = p.price;
+  const note = document.getElementById('pmNote');
+  note.textContent = p.fragrance || ''; note.hidden = !p.fragrance;
+  const img = document.getElementById('pmImg');
+  img.src = p.image; img.alt = `${p.name} — ÚLFĀ ${p.category}, ${p.size}`;
+  document.getElementById('pmOrder').href = waLink(p);
+  const isMist = p.cat==='mist';
+  document.getElementById('pmAcc').hidden = !isMist;
+  document.getElementById('pmGeneric').hidden = isMist;
+  if(window.lucide) lucide.createIcons();
+  modal.hidden = false;
+  requestAnimationFrame(()=> modal.classList.add('open'));
+  document.body.classList.add('no-scroll');
+  panel.scrollTop = 0;
+  modal.querySelector('.modal-close').focus();
+}
+function closeModal(){
+  modal.classList.remove('open');
+  document.body.classList.remove('no-scroll');
+  if(reduceMotion){ modal.hidden = true; }
+  else{ window.setTimeout(()=>{ modal.hidden = true; }, 380); }
+  if(lastFocused) lastFocused.focus();
+}
+document.addEventListener('click', e=>{
+  const opener = e.target.closest('[data-details]');
+  if(opener){ openModal(opener.dataset.details); return; }
+  if(e.target.closest('[data-close]')) closeModal();
+});
+document.addEventListener('keydown', e=>{
+  if(modal.hidden) return;
+  if(e.key==='Escape'){ closeModal(); return; }
+  if(e.key==='Tab'){
+    const f = Array.from(panel.querySelectorAll('a[href], button:not([disabled]), summary, details'))
+      .filter(el=> el.offsetParent!==null && el.tagName!=='DETAILS');
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+    else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+  }
+});
+
+/* ================================================================
+   HEADER / MOBILE MENU
+   ================================================================ */
+const header = document.getElementById('siteHeader');
+addEventListener('scroll', ()=> header.classList.toggle('is-scrolled', scrollY>10), {passive:true});
+
+const menu = document.getElementById('mobileMenu');
+const burger = document.getElementById('burger');
+function setMenu(open){
+  menu.hidden = false;
+  requestAnimationFrame(()=> menu.classList.toggle('open', open));
+  burger.setAttribute('aria-expanded', String(open));
+  document.body.classList.toggle('no-scroll', open);
+  burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  if(!open) window.setTimeout(()=>{ if(!menu.classList.contains('open')) menu.hidden = true; }, 420);
+  else document.getElementById('menuClose').focus();
+}
+burger.addEventListener('click', ()=> setMenu(!menu.classList.contains('open')));
+document.getElementById('menuClose').addEventListener('click', ()=> setMenu(false));
+menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> setMenu(false)));
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && menu.classList.contains('open')) setMenu(false); });
+
+/* ================================================================
+   REVEAL ON SCROLL
+   ================================================================ */
+let io = null;
+if('IntersectionObserver' in window && !reduceMotion){
+  io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold:.12, rootMargin:'0px 0px -6% 0px' });
+}
+function observeReveals(scope){
+  const els = (scope||document).querySelectorAll('.reveal');
+  if(!io){ els.forEach(el=>el.classList.add('in')); return; }
+  els.forEach(el=> io.observe(el));
+}
+
+/* ================================================================
+   IMAGE FALLBACK — never show a broken frame
+   ================================================================ */
+document.addEventListener('error', e=>{
+  const t = e.target;
+  if(t && t.tagName==='IMG'){
+    const holder = t.closest('[data-media] .plate') || t.closest('.plate') || t.closest('[data-media]') || t.parentElement;
+    if(holder) holder.classList.add('is-missing');
+    t.style.display='none';
+  }
+}, true);
+
+/* ================================================================
+   INIT
+   ================================================================ */
+document.getElementById('year').textContent = new Date().getFullYear();
+renderGallery('all');
+observeReveals(document);
+if(window.lucide) lucide.createIcons();
+window.addEventListener('load', ()=> document.body.classList.add('loaded'));
+document.body.classList.add('loaded'); /* ensure hero shows even before full image load */
+</script>
+</body>
+</html>
